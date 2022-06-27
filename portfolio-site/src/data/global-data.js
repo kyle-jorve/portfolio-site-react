@@ -5,16 +5,6 @@ export const globalData = {
 	get siteUrl() {
 		return 'https://kylejorve.com';
 	},
-	get seo() {
-		return {
-			canon: 'https://kylejorve.com/',
-			metaTitle: 'Kyle Jorve | Illustration and Design',
-			metaDesc:
-				'Kyle Jorve is an illustrator, designer, writer, and front end developer working primarily in the genres of fantasy and science fiction.',
-			metaImage:
-				'/dist/media/portfolio/pendrakes-chamber/final/kyle-jorve_pendrakes-chamber-640.jpg',
-		};
-	},
 	get recentWorkLimit() {
 		return 4;
 	},
@@ -26,9 +16,9 @@ export const globalData = {
 			},
 			{
 				pageName: 'Gallery',
-				url: '/portfolio',
-				icon: '/dist/media/icons/portfolio-icon.svg',
-				alt: 'Icon for Portfolio page',
+				url: '/gallery',
+				icon: '/dist/media/icons/gallery-icon.svg',
+				alt: 'Icon for Gallery page',
 				showInMobileNav: true,
 			},
 			{

@@ -1,5 +1,17 @@
-function useMediaConfig(props) {
-	return props.isFeatured
+function useThumbnailConfig(props) {
+	return props.isNew
+		? {
+				sources: [
+					{
+						url: `${props.thumbnailKey}-1024.jpg`,
+						minScreenWidth: 640,
+					},
+				],
+				mobile: {
+					url: `${props.thumbnailKey}-640.jpg`,
+				},
+		  }
+		: props.isFeatured
 		? {
 				sources: [
 					{
@@ -13,18 +25,6 @@ function useMediaConfig(props) {
 				],
 				mobile: {
 					url: `${props.thumbnailKey}-320.jpg`,
-				},
-		  }
-		: props.isNew
-		? {
-				sources: [
-					{
-						url: `${props.thumbnailKey}-1024.jpg`,
-						minScreenWidth: 640,
-					},
-				],
-				mobile: {
-					url: `${props.thumbnailKey}-640.jpg`,
 				},
 		  }
 		: props.isDetail
@@ -56,4 +56,4 @@ function useMediaConfig(props) {
 		  };
 }
 
-export default useMediaConfig;
+export default useThumbnailConfig;

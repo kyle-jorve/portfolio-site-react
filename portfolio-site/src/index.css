@@ -35,6 +35,10 @@ code {
 	max-width: 1200px;
 }
 
+.wrapper--wide {
+	max-width: 1600px;
+}
+
 .flex-line {
 	display: flex;
 	align-items: center;
@@ -48,4 +52,7 @@ code {
 	height: var(--border-width);
 	background: var(--white-cool);
 	content: '';
+}
+
+.logo-icon {
 }

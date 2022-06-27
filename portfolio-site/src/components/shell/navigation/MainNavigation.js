@@ -1,14 +1,15 @@
 import { globalData } from '../../data/global-data';
-import { portfolioData } from '../../data/portfolio-data';
+import { galleryData } from '../../data/gallery-data';
 import NavItem from './NavItem';
 import SocialIcon from './SocialIcon';
+import GalleryItem from '../../gallery/GalleryItem';
 import styles from './Nav.module.css';
 import socialStyles from './Social.module.css';
-import portfolioStyles from '../portfolio/Portfolio.module.css';
+import galleryStyles from '../gallery/Gallery.module.css';
 
 const navItems = globalData.nav;
 const socialItems = [...globalData.socialIcons.standard, ...globalData.socialIcons.commerce];
-const recentWork = portfolioData.items.slice(0, globalData.recentWorkLimit);
+const recentWork = galleryData.items.slice(0, globalData.recentWorkLimit);
 
 function Navigation() {
 	return (
@@ -37,9 +38,19 @@ function Navigation() {
 					<h2 className={`flex-line ${styles['nav__recent-work-title']}`}>Recent Work</h2>
 
 					<div
-						className={`${portfolioStyles['portfolio__grid']} ${portfolioStyles['portfolio__grid--nav']}`}
+						className={`${galleryStyles['gallery__grid']} ${galleryStyles['gallery__grid--nav']}`}
 					>
-						{recentWork.map((item) => {})}
+						{recentWork.map((item, index) => {
+							return (
+								<GalleryItem
+									isNew={index === 0}
+									name={item.name}
+									title={item.title}
+									thumbnailKey={item.thumbnailKey}
+									dimensions={item.dimensions}
+								/>
+							);
+						})}
 					</div>
 				</div>
 			</section>

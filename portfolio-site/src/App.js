@@ -1,20 +1,20 @@
 import { Fragment } from 'react';
 import { Route, Routes, useMatch } from 'react-router-dom';
-import Header from './components/shell/Header';
-import PortfolioDetail from './pages/PortfolioDetail';
-import Footer from './components/shell/Footer';
+import Header from './components/shell/header/Header';
+import GalleryDetail from './pages/GalleryDetail';
+import Footer from './components/shell/footer';
 import MobileNavigation from './components/shell/MobileNavigation';
 
 function App() {
-	const isDetailPage = useMatch('/portfolio/:itemID');
+	const isDetailPage = useMatch('/gallery/:itemID');
 
 	return (
 		<Fragment>
 			<Header />
 
 			<Routes>
-				{/* portfolio detail page */}
-				<Route path="/portfolio/:itemID" element={<PortfolioDetail />} />
+				{/* gallery detail page */}
+				<Route path="/gallery/:itemID" element={<GalleryDetail />} />
 			</Routes>
 
 			{!isDetailPage && <MobileNavigation />}
