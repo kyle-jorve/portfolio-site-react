@@ -24,8 +24,6 @@ function GalleryItem(props) {
 						className={styles['gallery__img']}
 						src={mobileImgSrc.mobile.url}
 						alt={props.thumbnailKey.alt}
-						width={props.dimensions[0]}
-						height={props.dimensions[1]}
 					/>
 				</picture>
 
