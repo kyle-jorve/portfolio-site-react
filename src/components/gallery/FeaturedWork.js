@@ -10,7 +10,7 @@ function FeaturedWork(props) {
 
 	return (
 		<section className={`section ${styles.featured}`} id={id}>
-			<h2 className={styles['featured__title']}>Featured Work</h2>
+			<h2 className={`underline ${styles['featured__title']}`}>Featured Work</h2>
 
 			<div className={`${styles['gallery__grid']} ${styles['gallery__grid--featured']}`}>
 				{props.featuredItems.map((item, index) => {

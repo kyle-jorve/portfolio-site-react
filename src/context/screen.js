@@ -17,6 +17,7 @@ export function ScreenContextProvider(props) {
 	const [navOpen, setNavOpen] = useState(false);
 	const [fromPage, setFromPage] = useState(null);
 	const [fromSection, setFromSection] = useState(null);
+	const [toSection, setToSection] = useState(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -58,7 +59,7 @@ export function ScreenContextProvider(props) {
 
 		if (!page) return;
 
-		navigate(`${page.url}${fromSection ? `#${fromSection}` : ''}`);
+		navigate(page.url);
 	}
 
 	return (
@@ -69,10 +70,12 @@ export function ScreenContextProvider(props) {
 				navOpen,
 				fromPage,
 				fromSection,
+				toSection,
 				navToggleHandler,
 				closeNav,
 				setFromPage,
 				setFromSection,
+				setToSection,
 				returnToOriginPage,
 			}}
 		>

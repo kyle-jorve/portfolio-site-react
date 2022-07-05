@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import ScreenContext from '../../context/screen';
 import styles from './CV.module.css';
 
 function HomeBio(props) {
+	const screenContext = useContext(ScreenContext);
 	const squareImg = require(`../../assets/${props.img.square}`);
 	const imgConfig = {
 		sources: props.img.sources.map((src) => {
@@ -31,7 +34,11 @@ function HomeBio(props) {
 						{props.content}
 
 						<div className={`${styles['bio-home__button-cont']}`}>
-							<Link className="button button--primary" to={props.url}>
+							<Link
+								className="button button--primary"
+								to={props.url}
+								onClick={() => screenContext.setToSection('resume')}
+							>
 								See R&eacute;sum&eacute;
 							</Link>
 						</div>
