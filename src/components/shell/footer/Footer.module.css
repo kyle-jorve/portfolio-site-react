@@ -1,0 +1,32 @@
+.footer {
+	padding: 1rem 1rem 0;
+}
+
+.footer__icons {
+	border-radius: var(--border-radius);
+	box-shadow: var(--soft-shadow);
+	overflow: hidden;
+}
+
+.footer__copyright {
+	padding: 2rem 0;
+	font-size: var(--text-sm);
+	text-align: center;
+	color: var(--gray-color);
+}
+
+.footer__copyright p {
+	margin: 0;
+}
+
+@media (min-width: 40em) {
+	.footer__icons {
+		display: grid;
+	}
+}
+
+@media (min-width: 64em) {
+	.footer {
+		padding: 2rem 2rem 0;
+	}
+}
