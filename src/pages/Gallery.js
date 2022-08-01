@@ -1,10 +1,12 @@
 import { useLocation } from 'react-router-dom';
-import { globalData } from '../hooks/data/global-data';
-import { galleryData } from '../hooks/data/gallery-data';
+import useGlobalData from '../hooks/data/global-data';
+import useGalleryData from '../hooks/data/gallery-data';
 import styles from '../components/gallery/Gallery.module.css';
 import GalleryItem from '../components/gallery/GalleryItem';
 
 function Gallery() {
+	const globalData = useGlobalData();
+	const galleryData = useGalleryData();
 	const location = useLocation();
 	const page = globalData.nav.find((p) => p.url === location.pathname);
 

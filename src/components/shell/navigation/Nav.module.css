@@ -89,7 +89,7 @@
 	color: var(--light-color);
 	opacity: 0;
 	pointer-events: none;
-	transition: opacity var(--long-transition);
+	transition: opacity var(--transition);
 }
 
 .nav__inner {
@@ -206,7 +206,7 @@
 	content: '';
 	opacity: 1;
 	pointer-events: none;
-	transition: opacity var(--long-transition);
+	transition: opacity var(--transition);
 }
 
 .mobile-nav__item {

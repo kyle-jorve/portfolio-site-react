@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import ScreenContext from '../../../context/screen';
-import { globalData } from '../../../hooks/data/global-data';
+import useGlobalData from '../../../hooks/data/global-data';
 import NavItem from './NavItem';
 import styles from './Nav.module.css';
 import NavButton from './NavButton';
 
-const navItems = globalData.nav.filter((item) => item.showInMobileNav);
-
 const MobileNavigation = React.forwardRef((props, ref) => {
+	const globalData = useGlobalData();
+	const navItems = globalData.nav.filter((item) => item.showInMobileNav);
 	const screenContext = useContext(ScreenContext);
 
 	return (

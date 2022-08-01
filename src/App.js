@@ -1,16 +1,26 @@
-import { Fragment, useContext, useEffect, useRef } from 'react';
+import React, { Suspense, useContext, useEffect, useRef } from 'react';
 import { Route, Routes, useMatch } from 'react-router-dom';
 import ScreenContext from './context/screen';
+import Home from './pages/Home';
 import Header from './components/shell/header/Header';
 import DetailHeader from './components/shell/header/DetailHeader';
-import Home from './pages/Home';
-import CV from './pages/CV';
-import Gallery from './pages/Gallery';
-import GalleryDetail from './pages/GalleryDetail';
 import Footer from './components/shell/footer/Footer';
 import MobileNavigation from './components/shell/navigation/MobileNavigation';
+import Loader from './components/shell/loader/Loader';
 
 const body = document.querySelector('body');
+const CV = React.lazy(() => {
+	return import('./pages/CV');
+});
+const Gallery = React.lazy(() => {
+	return import('./pages/Gallery');
+});
+const GalleryDetail = React.lazy(() => {
+	return import('./pages/GalleryDetail');
+});
+const NotFound = React.lazy(() => {
+	return import('./pages/NotFound');
+});
 let timeout;
 
 function App() {
@@ -20,6 +30,8 @@ function App() {
 
 	useEffect(() => {
 		if (timeout) clearTimeout(timeout);
+
+		screenContext.setLoadStatus('out');
 
 		if (isDetailPage) {
 			body.style.paddingBottom = '';
@@ -37,8 +49,10 @@ function App() {
 	}, [screenContext.mobile, isDetailPage]);
 
 	return (
-		<Fragment>
+		<Suspense>
 			{isDetailPage ? <DetailHeader /> : <Header />}
+
+			<Loader />
 
 			<Routes>
 				{/* home page */}
@@ -52,12 +66,15 @@ function App() {
 
 				{/* gallery detail page */}
 				<Route path="/gallery/:itemID" element={<GalleryDetail />} />
+
+				{/* 404 page */}
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 
 			{!isDetailPage && screenContext.mobile && <MobileNavigation ref={navRef} />}
 
 			<Footer />
-		</Fragment>
+		</Suspense>
 	);
 }
 

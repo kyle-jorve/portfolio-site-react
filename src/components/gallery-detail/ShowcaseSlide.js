@@ -4,7 +4,11 @@ import styles from './Showcase.module.css';
 function ShowcaseSlide(props) {
 	let slideClasses = [
 		styles['showcase__slide'],
-		props.active && styles['showcase__slide--active'],
+		props.index === props.activeIndex
+			? styles['showcase__slide--active']
+			: props.index < props.activeIndex
+			? styles['showcase__slide--prev']
+			: '',
 		!!props.item.source && styles['showcase__slide--video'],
 	];
 	let slideDataAttrs = {

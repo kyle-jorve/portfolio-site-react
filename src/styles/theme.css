@@ -35,6 +35,7 @@
 	--body-bg: var(--dark-color);
 
 	/* shadows */
+	--light-shadow: 0 6px 24px rgba(19, 21, 22, 0.15);
 	--shadow: 0 3px 6px rgba(19, 21, 22, 0.3);
 	--soft-shadow: 0 6px 24px rgba(19, 21, 22, 0.25);
 	--med-shadow: 0 6px 12px rgba(19, 21, 22, 0.25);
@@ -53,8 +54,11 @@
 	--section-padding: 4rem 1rem;
 
 	/* transitions */
-	--transition: 0.3s ease;
-	--long-transition: 0.6s ease;
+	--transition-dur: 0.3s;
+	--transition-ease: ease;
+
+	--transition: var(--transition-dur) var(--transition-ease);
+	--long-transition: calc(var(--transition-dur) * 2) var(--transition-ease);
 }
 
 @media (min-width: 64em) {

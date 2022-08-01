@@ -21,6 +21,16 @@ function HomeHero(props) {
 		},
 	};
 
+	function scrollIconClickHandler() {
+		const featuredWorkSection = document.querySelector('#featured-work');
+
+		if (!featuredWorkSection) return;
+
+		featuredWorkSection.scrollIntoView({
+			behavior: 'smooth',
+		});
+	}
+
 	return (
 		<section className={`section ${styles.hero}`}>
 			<h1 className={styles['hero__title']}>
@@ -28,16 +38,15 @@ function HomeHero(props) {
 				<small className={styles['hero__subtitle']}>Illustration and Design</small>
 			</h1>
 
-			<a
+			<button
 				className={styles['scroll']}
-				href="#featured-work"
-				title="Featured Work"
 				aria-label="scroll to Featured Work"
+				onClick={scrollIconClickHandler}
 			>
 				<span className={styles['scroll__track']}>
 					<span className={styles['scroll__ball']}></span>
 				</span>
-			</a>
+			</button>
 
 			<div className={styles['hero__bg']} aria-hidden="true">
 				<div className={styles['hero__img-frame']}>
@@ -52,7 +61,12 @@ function HomeHero(props) {
 							);
 						})}
 
-						<img className={styles['hero__bg-img']} src={bgConfig.mobile.src} alt="" />
+						<img
+							className={styles['hero__bg-img']}
+							src={bgConfig.mobile.src}
+							alt=""
+							loading="eager"
+						/>
 					</picture>
 				</div>
 
@@ -71,6 +85,7 @@ function HomeHero(props) {
 						className={`${styles['hero__bg-img']} ${styles['hero__bg-img--blur']}`}
 						src={bgConfig.mobile.src}
 						alt=""
+						loading="eager"
 					/>
 				</picture>
 			</div>

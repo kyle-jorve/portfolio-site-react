@@ -87,7 +87,6 @@
 	position: relative;
 	z-index: 2;
 	padding-top: 0;
-	border-bottom: var(--gray-border);
 	color: var(--dark-color);
 }
 
@@ -313,9 +312,15 @@
 	margin-bottom: -1rem;
 }
 
+/*----- media queries -----*/
+
 @media (min-width: 64em) {
 	.bio-home__content {
 		padding-bottom: 4rem;
+	}
+
+	.bio-home .bio__img-cont {
+		display: none;
 	}
 
 	.bio-home__box {
@@ -323,10 +328,6 @@
 		max-width: 560px;
 		padding: calc(var(--large-border-width) + 2rem) 2rem 2rem;
 		backdrop-filter: blur(60px);
-	}
-
-	.bio-home .bio__img-cont {
-		display: none;
 	}
 
 	.bio-home__title {

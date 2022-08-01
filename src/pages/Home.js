@@ -3,24 +3,23 @@ import ScreenContext from '../context/screen';
 import FeaturedWork from '../components/gallery/FeaturedWork';
 import HomeHero from '../components/hero/HomeHero';
 import HomeBio from '../components/cv/HomeBio';
-import { globalData } from '../hooks/data/global-data';
+import useGlobalData from '../hooks/data/global-data';
 import { homeData } from '../hooks/data/home-data';
 import useCVData from '../hooks/data/cv-data';
-import { galleryData } from '../hooks/data/gallery-data';
-
-const featuredItems = galleryData.items
-	.filter((item) => item.featured)
-	.slice(0, homeData.gallery.itemsLimit);
+import useGalleryData from '../hooks/data/gallery-data';
 
 function Home() {
+	const globalData = useGlobalData();
+	const galleryData = useGalleryData();
+	const featuredItems = galleryData.items
+		.filter((item) => item.featured)
+		.slice(0, homeData.gallery.itemsLimit);
 	const screenContext = useContext(ScreenContext);
 	const cvData = useCVData();
 
 	useEffect(() => {
 		if (screenContext.fromSection) {
 			const section = document.querySelector(`#${screenContext.fromSection}`);
-
-			screenContext.setFromSection(null);
 
 			if (!section) return;
 

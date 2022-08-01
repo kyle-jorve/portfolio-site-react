@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { globalData } from '../hooks/data/global-data';
+import useGlobalData from '../hooks/data/global-data';
 
 const resizeEvents = ['resize', 'orientationchange'];
 const breakpoint = 640;
-const pages = globalData.nav;
 const ScreenContext = React.createContext({
 	mobile: true,
 	navOpen: false,
 	fromPage: 'home',
 	fromSection: 'featured-work',
+	loadStatus: 'idle',
 });
 
 export function ScreenContextProvider(props) {
+	const globalData = useGlobalData();
+	const pages = globalData.nav;
 	const [mobile, setMobile] = useState(true);
 	const [navOpen, setNavOpen] = useState(false);
 	const [fromPage, setFromPage] = useState(null);
 	const [fromSection, setFromSection] = useState(null);
 	const [toSection, setToSection] = useState(null);
+	const [loadStatus, setLoadStatus] = useState('idle');
 	const navigate = useNavigate();
+	const loadDuration = 600; // milliseconds
 
 	useEffect(() => {
 		function resizeHandler() {
@@ -49,17 +53,21 @@ export function ScreenContextProvider(props) {
 	function returnToOriginPage() {
 		let page;
 
-		if (!fromPage) {
-			navigate('/');
+		setLoadStatus('in');
 
-			return;
-		}
+		setTimeout(() => {
+			if (!fromPage) {
+				navigate('/');
 
-		page = pages.find((p) => p.pageID === fromPage);
+				return;
+			}
 
-		if (!page) return;
+			page = pages.find((p) => p.pageID === fromPage);
 
-		navigate(page.url);
+			if (!page) return;
+
+			navigate(page.url);
+		}, loadDuration);
 	}
 
 	return (
@@ -71,12 +79,15 @@ export function ScreenContextProvider(props) {
 				fromPage,
 				fromSection,
 				toSection,
+				loadStatus,
+				loadDuration,
 				navToggleHandler,
 				closeNav,
 				setFromPage,
 				setFromSection,
 				setToSection,
 				returnToOriginPage,
+				setLoadStatus,
 			}}
 		>
 			{props.children}

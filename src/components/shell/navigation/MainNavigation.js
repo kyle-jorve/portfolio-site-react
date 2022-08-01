@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import ScreenContext from '../../../context/screen';
-import { globalData } from '../../../hooks/data/global-data';
-import { galleryData } from '../../../hooks/data/gallery-data';
+import useGlobalData from '../../../hooks/data/global-data';
+import useGalleryData from '../../../hooks/data/gallery-data';
 import NavItem from './NavItem';
 import SocialIcon from '../icons/SocialIcon';
 import GalleryItem from '../../gallery/GalleryItem';
@@ -10,10 +10,11 @@ import styles from './Nav.module.css';
 import socialStyles from '../icons/Social.module.css';
 import galleryStyles from '../../gallery/Gallery.module.css';
 
-const navItems = globalData.nav;
-const recentWork = galleryData.items.slice(0, globalData.recentWorkLimit);
-
 function MainNavigation() {
+	const globalData = useGlobalData();
+	const navItems = globalData.nav;
+	const galleryData = useGalleryData();
+	const recentWork = galleryData.items.slice(0, globalData.recentWorkLimit);
 	const location = useLocation();
 	const page = globalData.nav.find((p) => p.url === location.pathname);
 	const screenContext = useContext(ScreenContext);
@@ -72,6 +73,7 @@ function MainNavigation() {
 									title={item.title}
 									thumbnailKey={item.thumbnailKey}
 									orientation={item.orientation}
+									isInNav={true}
 									fromPage={page ? page.pageID : null}
 									fromSection={null}
 								/>

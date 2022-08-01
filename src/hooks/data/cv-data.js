@@ -1,10 +1,12 @@
 import { Fragment, useContext } from 'react';
-import { globalData } from './global-data';
+import useGlobalData from './global-data';
 import ScreenContext from '../../context/screen';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import CustomLink from '../../components/shell/navigation/CustomLink';
 import styles from '../../components/cv/CV.module.css';
 
 function useCVData() {
+	const globalData = useGlobalData();
 	const screenContext = useContext(ScreenContext);
 	const location = useLocation();
 	const page = globalData.nav.find((p) => p.url === location.pathname);
@@ -16,6 +18,8 @@ function useCVData() {
 
 		if (page.pageID === 'home') {
 			screenContext.setFromSection('bio');
+		} else {
+			screenContext.setFromSection(null);
 		}
 	}
 
@@ -40,21 +44,21 @@ function useCVData() {
 							vibrant color and depictions of original characters teeming with history
 							and detail, as exemplified in pieces such as{' '}
 							{
-								<Link to="/gallery/becoming-runa" onClick={setPageContext}>
+								<CustomLink to="/gallery/becoming-runa" onClick={setPageContext}>
 									Becoming Runa
-								</Link>
+								</CustomLink>
 							}
 							,{' '}
 							{
-								<Link to="/gallery/berned" onClick={setPageContext}>
+								<CustomLink to="/gallery/berned" onClick={setPageContext}>
 									Berned
-								</Link>
+								</CustomLink>
 							}
 							, and{' '}
 							{
-								<Link to="/gallery/crows" onClick={setPageContext}>
+								<CustomLink to="/gallery/crows" onClick={setPageContext}>
 									Crows
-								</Link>
+								</CustomLink>
 							}
 							.
 						</p>

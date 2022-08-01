@@ -1,8 +1,9 @@
 import Neighbor from './Neighbor';
-import { galleryData } from '../../hooks/data/gallery-data';
+import useGalleryData from '../../hooks/data/gallery-data';
 import styles from './Showcase.module.css';
 
 function Neighbors(props) {
+	const galleryData = useGalleryData();
 	const itemIndex = galleryData.items.findIndex((item) => item.name === props.item.name);
 	const neighbors = {
 		next: galleryData.items[itemIndex + 1],

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import DetailPageContext from '../../context/detail-page';
-import { Link } from 'react-router-dom';
+import CustomLink from '../shell/navigation/CustomLink';
 import useThumbnailConfig from '../../hooks/thumbnail-config';
 import styles from './Showcase.module.css';
 
@@ -46,7 +46,7 @@ function Neighbor(props) {
 
 	return (
 		<article className={neighborClasses.join(' ')}>
-			<Link
+			<CustomLink
 				className={styles['neighbor__link']}
 				to={`/gallery/${props.item.name}`}
 				onClick={context.resetSlideIndex}
@@ -72,6 +72,7 @@ function Neighbor(props) {
 							style={{
 								objectPosition: `center ${props.item.orientation}`,
 							}}
+							loading="lazy"
 						/>
 					</picture>
 				</div>
@@ -92,7 +93,7 @@ function Neighbor(props) {
 						</h3>
 					</div>
 				</div>
-			</Link>
+			</CustomLink>
 		</article>
 	);
 }

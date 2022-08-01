@@ -12,6 +12,11 @@
 	overflow: hidden;
 }
 
+.hero--short {
+	justify-content: center;
+	min-height: 56.25vw;
+}
+
 .hero__title {
 	position: relative;
 	z-index: 3;
@@ -175,11 +180,17 @@
 	}
 }
 
-/*----- media queries -----*/
+/*===================================*/
+/*=====----- MEDIA QUERIES -----=====*/
+/*===================================*/
 
 @media (min-width: 40em) {
 	.hero {
 		min-height: calc(100vh - 3rem);
+	}
+
+	.hero--short {
+		min-height: 56.25vw;
 	}
 
 	.hero__title {
@@ -198,7 +209,7 @@
 
 @media (min-width: 64em) {
 	.hero__img-frame {
-		inset: 60px auto 120px 50%;
+		inset: calc(var(--nav-button-width) + 2rem) auto 120px 50%;
 		transform: translateX(-50%);
 		width: calc(100% - 4rem);
 		max-width: 1920px;

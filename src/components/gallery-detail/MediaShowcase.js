@@ -36,9 +36,9 @@ function MediaShowcase(props) {
 						<ShowcaseSlide
 							key={index}
 							index={index}
+							activeIndex={context.activeSlideIndex}
 							zIndex={zIndex}
 							item={key}
-							active={index === context.activeSlideIndex}
 						/>
 					);
 				})}
@@ -52,6 +52,7 @@ function MediaShowcase(props) {
 							className={`${styles['slider__arrow']} ${styles['slider__arrow--prev']}`}
 							data-direction="prev"
 						></button>
+
 						<button
 							onClick={arrowClickHandler}
 							className={`${styles['slider__arrow']} ${styles['slider__arrow--next']}`}

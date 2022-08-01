@@ -19,7 +19,7 @@ function ShowcasePicture(props) {
 				);
 			})}
 
-			<img className={styles['showcase__img']} src={imgSrc} alt={props.alt} />
+			<img className={styles['showcase__img']} src={imgSrc} alt={props.alt} loading="lazy" />
 		</picture>
 	);
 }

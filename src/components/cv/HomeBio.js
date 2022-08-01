@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import CustomLink from '../shell/navigation/CustomLink';
 import ScreenContext from '../../context/screen';
 import styles from './CV.module.css';
 
@@ -34,13 +34,13 @@ function HomeBio(props) {
 						{props.content}
 
 						<div className={`${styles['bio-home__button-cont']}`}>
-							<Link
+							<CustomLink
 								className="button button--primary"
 								to={props.url}
 								onClick={() => screenContext.setToSection('resume')}
 							>
 								See R&eacute;sum&eacute;
-							</Link>
+							</CustomLink>
 						</div>
 					</div>
 
@@ -60,6 +60,7 @@ function HomeBio(props) {
 								className={styles['bio-home__img']}
 								src={imgConfig.mobile.src}
 								alt={props.img.alt}
+								loading="lazy"
 							/>
 						</picture>
 					</div>

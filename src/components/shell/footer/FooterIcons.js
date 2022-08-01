@@ -1,6 +1,6 @@
+import SocialIcon from '../icons/SocialIcon';
 import styles from './Footer.module.css';
 import socialStyles from '../icons/Social.module.css';
-import SocialIcon from '../icons/SocialIcon';
 
 function FooterIcons(props) {
 	const iconsLength = props.socialIcons.standard.length + props.socialIcons.commerce.length;
@@ -20,7 +20,7 @@ function FooterIcons(props) {
 			}}
 		>
 			<div
-				className={`${socialStyles.social} ${socialStyles['social--footer']} ${socialStyles['social--standard']}`}
+				className={`${socialStyles.social} ${styles['footer__social']} ${styles['footer__social--standard']}`}
 			>
 				{props.socialIcons.standard.map((item, index) => {
 					return (
@@ -32,7 +32,7 @@ function FooterIcons(props) {
 			</div>
 
 			<div
-				className={`${socialStyles.social} ${socialStyles['social--footer']} ${socialStyles['social--commerce']}`}
+				className={`${socialStyles.social} ${styles['footer__social']} ${styles['footer__social--commerce']}`}
 			>
 				{props.socialIcons.commerce.map((item, index) => {
 					return (

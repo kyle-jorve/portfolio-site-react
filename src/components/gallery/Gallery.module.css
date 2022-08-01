@@ -24,7 +24,7 @@
 	overflow: hidden;
 	color: var(--light-color);
 	text-align: left;
-	transition: transform var(--transition), box-shadow var(--transition);
+	transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
 }
 
 .gallery__item::before,
@@ -106,6 +106,8 @@
 	transition: transform var(--transition);
 }
 
+/*----- media queries -----*/
+
 @media (hover: hover) {
 	.gallery__item:hover {
 		z-index: 2;
@@ -127,6 +129,10 @@
 }
 
 @media (min-width: 40em) {
+	.gallery {
+		padding-top: 8rem;
+	}
+
 	.gallery__grid {
 		grid-template: auto / repeat(3, minmax(0, 1fr));
 		gap: 1rem;
@@ -137,6 +143,14 @@
 	.gallery__item-title {
 		padding: 1rem 1.5rem;
 		font-size: var(--text-lg);
+	}
+
+	/*-- animated gallery item --*/
+
+	.gallery__item--animated {
+		opacity: 0;
+		transform: translateY(2rem);
+		pointer-events: none;
 	}
 }
 
