@@ -8,6 +8,8 @@ import { homeData } from '../hooks/data/home-data';
 import useCVData from '../hooks/data/cv-data';
 import useGalleryData from '../hooks/data/gallery-data';
 
+let timeout;
+
 function Home() {
 	const globalData = useGlobalData();
 	const galleryData = useGalleryData();
@@ -18,6 +20,8 @@ function Home() {
 	const cvData = useCVData();
 
 	useEffect(() => {
+		if (timeout) clearTimeout(timeout);
+
 		if (screenContext.fromSection) {
 			const section = document.querySelector(`#${screenContext.fromSection}`);
 
@@ -25,6 +29,10 @@ function Home() {
 
 			section.scrollIntoView();
 		}
+
+		timeout = setTimeout(() => {
+			screenContext.setVisited(true);
+		}, 3000); // total time for hero to animate in
 	}, [screenContext.fromSection]);
 
 	return (

@@ -36,7 +36,7 @@ function FooterIcons(props) {
 			>
 				{props.socialIcons.commerce.map((item, index) => {
 					return (
-						<SocialIcon key={index} name={item.name}>
+						<SocialIcon key={index} name={item.name} url={item.url}>
 							{!!item.icon && item.icon}
 						</SocialIcon>
 					);

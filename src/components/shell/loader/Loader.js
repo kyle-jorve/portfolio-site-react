@@ -2,25 +2,23 @@ import { useContext } from 'react';
 import ScreenContext from '../../../context/screen';
 import styles from './Loader.module.css';
 
-function Loader(props) {
+function Loader() {
 	const screenContext = useContext(ScreenContext);
-	let classes = [
+	const classes = [
 		styles.loader,
 		screenContext.loadStatus === 'in'
 			? styles['loader--slide-in']
-			: screenContext.loadStatus === 'out'
+			: screenContext.loadStatus === 'out' || screenContext.loadStatus === 'done'
 			? styles['loader--slide-out']
 			: '',
-	];
-
-	classes = classes.filter((c) => c);
+	].filter((c) => c);
 
 	return (
 		<div
 			className={classes.join(' ')}
 			aria-hidden="true"
 			style={{
-				animationDuration: `${screenContext.loadDuration}ms`,
+				animationDuration: `${screenContext.longTransitionDuration}ms`,
 			}}
 		>
 			<span className={styles['loader__track']}>

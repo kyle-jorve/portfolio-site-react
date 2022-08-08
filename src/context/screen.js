@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGlobalData from '../hooks/data/global-data';
 
 const resizeEvents = ['resize', 'orientationchange'];
-const breakpoint = 640;
+const breakpoints = [640, 1024];
 const ScreenContext = React.createContext({
 	mobile: true,
 	navOpen: false,
@@ -13,22 +13,33 @@ const ScreenContext = React.createContext({
 });
 
 export function ScreenContextProvider(props) {
+	const navButtonRef = useRef();
 	const globalData = useGlobalData();
 	const pages = globalData.nav;
+	const [visited, setVisited] = useState(false);
 	const [mobile, setMobile] = useState(true);
+	const [desktop, setDesktop] = useState(true);
 	const [navOpen, setNavOpen] = useState(false);
+	const [navRevealed, setNavRevealed] = useState(false);
 	const [fromPage, setFromPage] = useState(null);
 	const [fromSection, setFromSection] = useState(null);
 	const [toSection, setToSection] = useState(null);
 	const [loadStatus, setLoadStatus] = useState('idle');
 	const navigate = useNavigate();
-	const loadDuration = 600; // milliseconds
+	const longTransitionDuration = 600; // milliseconds
+	const transitionDuration = 300; // milliseconds
+	const transitionDelay = 100;
 
 	useEffect(() => {
 		function resizeHandler() {
-			if (window.innerWidth >= breakpoint) {
+			if (window.innerWidth >= breakpoints[1]) {
+				setDesktop(true);
+				setMobile(false);
+			} else if (window.innerWidth >= breakpoints[0]) {
+				setDesktop(false);
 				setMobile(false);
 			} else {
+				setDesktop(false);
 				setMobile(true);
 			}
 		}
@@ -43,11 +54,31 @@ export function ScreenContextProvider(props) {
 	}, []);
 
 	function navToggleHandler() {
-		setNavOpen((prev) => !prev);
+		navButtonRef.current.style.pointerEvents = 'none';
+
+		setTimeout(() => {
+			navButtonRef.current.style.pointerEvents = '';
+		}, transitionDuration + [...globalData.socialIcons.standard, ...globalData.socialIcons.commerce].length * 100);
+
+		setNavOpen((prev) => {
+			if (!prev) {
+				setNavRevealed(true);
+			} else {
+				setTimeout(() => {
+					setNavRevealed(false);
+				}, transitionDuration);
+			}
+
+			return !prev;
+		});
 	}
 
 	function closeNav() {
 		setNavOpen(false);
+
+		setTimeout(() => {
+			setNavRevealed(false);
+		}, transitionDuration);
 	}
 
 	function returnToOriginPage() {
@@ -67,20 +98,26 @@ export function ScreenContextProvider(props) {
 			if (!page) return;
 
 			navigate(page.url);
-		}, loadDuration);
+		}, longTransitionDuration);
 	}
 
 	return (
 		<ScreenContext.Provider
 			value={{
 				mobile,
-				breakpoint,
+				breakpoints,
 				navOpen,
+				navRevealed,
 				fromPage,
 				fromSection,
 				toSection,
 				loadStatus,
-				loadDuration,
+				longTransitionDuration,
+				transitionDuration,
+				transitionDelay,
+				desktop,
+				navButtonRef,
+				visited,
 				navToggleHandler,
 				closeNav,
 				setFromPage,
@@ -88,6 +125,7 @@ export function ScreenContextProvider(props) {
 				setToSection,
 				returnToOriginPage,
 				setLoadStatus,
+				setVisited,
 			}}
 		>
 			{props.children}

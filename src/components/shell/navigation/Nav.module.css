@@ -178,6 +178,39 @@
 	.nav {
 		padding: 8em 2em 2em;
 	}
+
+	.nav__a {
+		transform: translateY(2rem);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity var(--transition), transform var(--transition), color var(--transition);
+	}
+
+	.nav .social__item--nav {
+		transform: translateX(2rem);
+		opacity: 0;
+		pointer-events: none;
+		transition: transform var(--transition), opacity var(--transition),
+			background-color var(--transition), color var(--transition);
+	}
+
+	/*----- nav revealed -----*/
+
+	:where(.nav--active, .nav--revealed) .nav__a {
+		transform: none;
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	:where(.nav--active, .nav--revealed) .nav__a--current {
+		pointer-events: none;
+	}
+
+	.nav:where(.nav--active, .nav--revealed) .social__item--nav {
+		transform: none;
+		opacity: 1;
+		pointer-events: all;
+	}
 }
 
 /*=======================================*/

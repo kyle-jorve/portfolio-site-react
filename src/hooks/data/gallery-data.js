@@ -9,6 +9,65 @@ function useGalleryData() {
 		get items() {
 			return [
 				{
+					name: 'toval-argensente',
+					title: 'Toval Argensente',
+					content: (
+						<Fragment>
+							<p>
+								<strong>Toval Argensente</strong> is a descendant of the Norfeld, a
+								tribal people who migrated south from the Ice Wilds millennia ago.
+								Her pure-blooded Norfeld features&mdash;ice-white skin, hair, and
+								eyes&mdash;are a rarity these days, especially in the kingdoms of
+								Lensing.
+							</p>
+							<p>
+								Toval is a lieutenant in the Auerstel soldiery, and is responsible
+								for training new recruits.{' '}
+								<CustomLink to="/gallery/pendrake">Pendrake</CustomLink> has never
+								taken to his training and, as such, has become a constant thorn in
+								Toval's side.
+							</p>
+							<p>
+								As far as Toval is concerned, Pendrake's noble status means nothing
+								on the training grounds, and she disciplines his lack of commitment
+								as harshly as she would any other soldier under her command.
+							</p>
+						</Fragment>
+					),
+					orientation: 'top',
+					featured: true,
+					thumbnailKey: {
+						path: 'toval/final/kyle-jorve_toval',
+						alt: 'a vignette of Toval Argensente, looking menacingly toward the viewer with a sword in her left hand pointed to the ground',
+					},
+					detailKeys: [
+						{
+							path: 'toval/final/kyle-jorve_toval',
+							alt: 'a vignette of Toval Argensente, looking menacingly toward the viewer with a sword in her left hand pointed to the ground',
+						},
+						{
+							path: 'toval/wip-1/kyle-jorve_toval-wip-1',
+							alt: `a nude pose study for Toval's vignette`,
+						},
+						{
+							path: 'toval/wip-2/kyle-jorve_toval-wip-2',
+							alt: `a progress snapshot of Toval's vignette in which the line drawing is complete`,
+						},
+						{
+							path: 'toval/wip-3/kyle-jorve_toval-wip-3',
+							alt: `a progress snapshot of Toval's vignette in which the flat colors have been applied`,
+						},
+						{
+							path: 'toval/wip-4/kyle-jorve_toval-wip-4',
+							alt: `a progress snapshot of Toval's vignette in which the light and shadows have been applied and colorized`,
+						},
+						{
+							path: 'toval/wip-5/kyle-jorve_toval-wip-5',
+							alt: `a progress snapshot of Toval's vignette in which the painting is nearly finished`,
+						},
+					],
+				},
+				{
 					name: 'andel-portrait',
 					title: 'Andel Sommer Portrait',
 					content: (

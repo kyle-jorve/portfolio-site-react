@@ -10,6 +10,10 @@ body {
 	overflow-x: hidden;
 }
 
+body.gallery-page {
+	background: linear-gradient(to bottom, var(--gray-darker), var(--black-cool));
+}
+
 *,
 *::before,
 *::after {
@@ -40,6 +44,10 @@ svg {
 .wrapper {
 	width: 100%;
 	margin: 0 auto;
+}
+
+.wrapper--narrow {
+	max-width: 50ch;
 }
 
 .wrapper--content {

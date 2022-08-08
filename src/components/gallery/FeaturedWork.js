@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+import ScreenContext from '../../context/screen';
 import CustomLink from '../shell/navigation/CustomLink';
 import useGlobalData from '../../hooks/data/global-data';
 import GalleryItem from './GalleryItem';
@@ -8,12 +9,10 @@ import styles from './Gallery.module.css';
 const ioOptions = {
 	threshold: 0.25,
 };
-const delay = 100;
-let transitionDur;
-let totalDelay;
 let io;
 
 function FeaturedWork(props) {
+	const screenContext = useContext(ScreenContext);
 	const sectionRef = useRef();
 	const globalData = useGlobalData();
 	const location = useLocation();
@@ -21,28 +20,28 @@ function FeaturedWork(props) {
 	const [animationDone, setAnimationDone] = useState(false);
 	const page = globalData.nav.find((p) => p.url === location.pathname);
 	const id = 'featured-work';
+	const totalDelay =
+		(props.featuredItems.length - 1) * screenContext.transitionDelay +
+		screenContext.transitionDuration;
 
-	const ioHandler = useCallback((entries, observer) => {
-		entries.forEach((ent) => {
-			if (!ent.isIntersecting) return;
+	const ioHandler = useCallback(
+		(entries, observer) => {
+			entries.forEach((ent) => {
+				if (!ent.isIntersecting) return;
 
-			setIntersected(true);
+				setIntersected(true);
 
-			setTimeout(() => {
-				setAnimationDone(true);
-			}, totalDelay);
+				setTimeout(() => {
+					setAnimationDone(true);
+				}, totalDelay);
 
-			observer.disconnect();
-		});
-	}, []);
+				observer.disconnect();
+			});
+		},
+		[totalDelay]
+	);
 
 	useEffect(() => {
-		transitionDur =
-			parseFloat(
-				getComputedStyle(document.documentElement).getPropertyValue('--transition-dur')
-			) * 1000;
-		totalDelay = (props.featuredItems.length - 1) * delay + transitionDur;
-
 		io = new IntersectionObserver(ioHandler, ioOptions);
 
 		io.observe(sectionRef.current);
@@ -50,7 +49,7 @@ function FeaturedWork(props) {
 		return () => {
 			io.disconnect();
 		};
-	}, [props.featuredItems.length, ioHandler]);
+	}, [ioHandler]);
 
 	return (
 		<section ref={sectionRef} className={`section ${styles.featured}`} id={id}>
@@ -71,7 +70,9 @@ function FeaturedWork(props) {
 							fromSection={id}
 							className={!intersected ? styles['gallery__item--animated'] : ''}
 							style={{
-								transitionDelay: !animationDone ? `${index * delay}ms` : '',
+								transitionDelay: !animationDone
+									? `${index * screenContext.transitionDelay}ms`
+									: '',
 							}}
 						/>
 					);

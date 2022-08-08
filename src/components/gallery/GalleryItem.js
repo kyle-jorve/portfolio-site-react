@@ -8,6 +8,7 @@ function GalleryItem(props) {
 	const screenContext = useContext(ScreenContext);
 	const mediaConfig = useThumbnailConfig(props);
 	const mobileImgSrc = require(`../../assets/gallery/${mediaConfig.mobile.url}`);
+	let classes = [styles['gallery__item'], props.className].filter((c) => c);
 
 	function galleryItemClickHandler() {
 		screenContext.setLoadStatus('in');
@@ -24,14 +25,11 @@ function GalleryItem(props) {
 			} else {
 				screenContext.setFromSection(null);
 			}
-		}, screenContext.loadDuration);
+		}, screenContext.longTransitionDuration);
 	}
 
 	return (
-		<article
-			className={`${styles['gallery__item']}${props.className ? ` ${props.className}` : ''}`}
-			style={props.style}
-		>
+		<article className={classes.join(' ')} style={props.style}>
 			{props.isNew ? <span className={styles['gallery__new-badge']}>New</span> : ''}
 
 			<CustomLink

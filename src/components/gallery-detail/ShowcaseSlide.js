@@ -2,7 +2,7 @@ import ShowcasePicture from './ShowcasePicture';
 import styles from './Showcase.module.css';
 
 function ShowcaseSlide(props) {
-	let slideClasses = [
+	const slideClasses = [
 		styles['showcase__slide'],
 		props.index === props.activeIndex
 			? styles['showcase__slide--active']
@@ -10,12 +10,7 @@ function ShowcaseSlide(props) {
 			? styles['showcase__slide--prev']
 			: '',
 		!!props.item.source && styles['showcase__slide--video'],
-	];
-	let slideDataAttrs = {
-		'data-index': props.index,
-	};
-
-	slideClasses = slideClasses.filter((sc) => sc);
+	].filter((c) => c);
 
 	return (
 		<div
@@ -23,7 +18,7 @@ function ShowcaseSlide(props) {
 			style={{
 				zIndex: props.zIndex,
 			}}
-			{...slideDataAttrs}
+			data-index={props.index}
 		>
 			<div
 				className={`${styles['showcase__img-cont']}${

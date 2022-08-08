@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ScreenContext from '../../../context/screen';
 import useGlobalData from '../../../hooks/data/global-data';
@@ -10,21 +10,70 @@ import styles from './Nav.module.css';
 import socialStyles from '../icons/Social.module.css';
 import galleryStyles from '../../gallery/Gallery.module.css';
 
+let timeout = {
+	social: null,
+	gallery: null,
+};
+
 function MainNavigation() {
 	const globalData = useGlobalData();
-	const navItems = globalData.nav;
 	const galleryData = useGalleryData();
+	const [socialIconsAnimationDone, setSocialIconsAnimationDone] = useState(false);
+	const [galleryAnimationDone, setGalleryAnimationDone] = useState(false);
+	const navItems = globalData.nav;
 	const recentWork = galleryData.items.slice(0, globalData.recentWorkLimit);
 	const location = useLocation();
 	const page = globalData.nav.find((p) => p.url === location.pathname);
 	const screenContext = useContext(ScreenContext);
+	const totalDelay = {
+		icons:
+			([...globalData.socialIcons.standard, ...globalData.socialIcons.commerce].length - 1) *
+				screenContext.transitionDelay +
+			screenContext.transitionDuration,
+		gallery:
+			recentWork.length * screenContext.transtionDelay + screenContext.transitionDuration,
+		navItems:
+			navItems.length * screenContext.transitionDelay + screenContext.transitionDuration,
+	};
+	const classes = [
+		styles.nav,
+		screenContext.navOpen && styles['nav--active'],
+		screenContext.navRevealed && styles['nav--revealed'],
+	].filter((c) => c);
+
+	useEffect(() => {
+		if (screenContext.navOpen) {
+			timeout.social = setTimeout(() => {
+				setSocialIconsAnimationDone(true);
+			}, totalDelay.icons);
+
+			timeout.gallery = setTimeout(() => {
+				setGalleryAnimationDone(true);
+			}, totalDelay.gallery);
+		} else {
+			setSocialIconsAnimationDone(false);
+			setGalleryAnimationDone(false);
+		}
+
+		return () => {
+			if (timeout.social) clearTimeout(timeout.social);
+			if (timeout.gallery) clearTimeout(timeout.gallery);
+		};
+	}, [screenContext.navOpen, totalDelay.icons, totalDelay.gallery]);
 
 	return (
-		<nav className={`${styles.nav}${screenContext.navOpen ? ` ${styles['nav--active']}` : ''}`}>
+		<nav className={classes.join(' ')} aria-hidden={!screenContext.navOpen}>
 			<section className={styles['nav__inner']}>
 				{navItems.map((item, index) => {
 					return (
-						<NavItem key={index} url={item.url} onClick={screenContext.closeNav}>
+						<NavItem
+							isMainNav={true}
+							totalDelay={totalDelay.navItems}
+							key={index}
+							index={index}
+							url={item.url}
+							onClick={screenContext.closeNav}
+						>
 							{item.pageName}
 						</NavItem>
 					);
@@ -37,19 +86,37 @@ function MainNavigation() {
 				>
 					{globalData.socialIcons.standard.map((item, index) => {
 						return (
-							<SocialIcon key={index} name={item.name} url={item.url}>
+							<SocialIcon
+								className={styles['social__item--nav']}
+								key={index}
+								name={item.name}
+								url={item.url}
+								style={{
+									transitionDelay: !socialIconsAnimationDone
+										? `${index * screenContext.transitionDelay}ms`
+										: '',
+								}}
+							>
 								{!!item.icon && item.icon}
 							</SocialIcon>
 						);
 					})}
 				</div>
 
-				<div
-					className={`${socialStyles['social__row']} ${socialStyles['social__row--commerce']}`}
-				>
+				<div className={socialStyles['social__row']}>
 					{globalData.socialIcons.commerce.map((item, index) => {
 						return (
-							<SocialIcon key={index} name={item.name} url={item.url}>
+							<SocialIcon
+								className={styles['social__item--nav']}
+								key={index}
+								name={item.name}
+								url={item.url}
+								style={{
+									transitionDelay: !socialIconsAnimationDone
+										? `${index * screenContext.transitionDelay}ms`
+										: '',
+								}}
+							>
 								{!!item.icon && item.icon}
 							</SocialIcon>
 						);
@@ -68,6 +135,11 @@ function MainNavigation() {
 							return (
 								<GalleryItem
 									key={index}
+									className={
+										!screenContext.navRevealed
+											? galleryStyles['gallery__item--animated']
+											: ''
+									}
 									isNew={index === 0}
 									name={item.name}
 									title={item.title}
@@ -76,6 +148,11 @@ function MainNavigation() {
 									isInNav={true}
 									fromPage={page ? page.pageID : null}
 									fromSection={null}
+									style={{
+										transitionDelay: !galleryAnimationDone
+											? `${index * screenContext.transitionDelay}ms`
+											: '',
+									}}
 								/>
 							);
 						})}

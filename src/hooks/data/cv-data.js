@@ -36,42 +36,23 @@ function useCVData() {
 				content: (
 					<Fragment>
 						<p className="large-text">
-							Illustrator and designer Kyle Jorve has always been enamored of stories
-							of fantasy and science fiction.
+							Illustrator and designer Kyle Jorve has always been drawn to stories of
+							fantasy and science fiction.
 						</p>
 						<p>
-							This comes across in his work today in contrasting brushstrokes of
-							vibrant color and depictions of original characters teeming with history
-							and detail, as exemplified in pieces such as{' '}
-							{
-								<CustomLink to="/gallery/becoming-runa" onClick={setPageContext}>
-									Becoming Runa
-								</CustomLink>
-							}
-							,{' '}
-							{
-								<CustomLink to="/gallery/berned" onClick={setPageContext}>
-									Berned
-								</CustomLink>
-							}
-							, and{' '}
-							{
-								<CustomLink to="/gallery/crows" onClick={setPageContext}>
-									Crows
-								</CustomLink>
-							}
-							.
+							Today, he expresses his love for these genres by dreaming up new worlds
+							and illustrating the characters that populate them.
 						</p>
 						<p>
-							As a teenager, Jorve taught himself the medium of digital painting and
-							fell in love with it. Not long after that, his paintings began to grow
-							into universes of their own and inspire the works of fiction that he
-							continues to write today.
+							As a teenager, Jorve discovered the medium of digital painting online
+							and quickly fell in love. He taught himself to draw and paint digitally,
+							and soon began to create original characters and build stories around
+							them.
 						</p>
 						<p>
 							Currently, Jorve works as a front end developer for a Tucson-based
 							digital marketing company. In his free time he writes and illustrates
-							his colorful worlds into life.
+							his fictional worlds into life.
 						</p>
 					</Fragment>
 				),

@@ -8,6 +8,12 @@ function CustomLink(props) {
 	const screenContext = useContext(ScreenContext);
 
 	function linkClickHandler(event) {
+		if (!screenContext.desktop) {
+			onClick();
+
+			return;
+		}
+
 		event.preventDefault();
 
 		onClick();
@@ -18,7 +24,11 @@ function CustomLink(props) {
 			navigate(props.to);
 
 			screenContext.setLoadStatus('out');
-		}, screenContext.loadDuration);
+
+			setTimeout(() => {
+				screenContext.setLoadStatus('done');
+			}, screenContext.longTransitionDuration);
+		}, screenContext.longTransitionDuration);
 	}
 
 	return (

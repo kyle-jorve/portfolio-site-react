@@ -36,13 +36,11 @@ function Neighbor(props) {
 		thumbnailKey: props.item.thumbnailKey,
 	});
 	const mobileImg = require(`../../assets/gallery/${thumb.mobile.url}`);
-	let neighborClasses = [
+	const neighborClasses = [
 		styles['neighbor'],
 		styles[`neighbor--${props.direction}`],
 		props.solo && styles['neighbor--solo'],
-	];
-
-	neighborClasses = neighborClasses.filter((c) => c);
+	].filter((c) => c);
 
 	return (
 		<article className={neighborClasses.join(' ')}>

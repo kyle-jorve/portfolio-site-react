@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import ScreenContext from '../../context/screen';
 import styles from './Hero.module.css';
+import logo from '../../assets/icons-logos/logo-circle.svg';
 
 function HomeHero(props) {
+	const screenContext = useContext(ScreenContext);
 	const bgConfig = {
 		sources: [
 			{
@@ -20,6 +24,12 @@ function HomeHero(props) {
 			src: require(`../../assets/${props.imageKey}-640.jpg`),
 		},
 	};
+	const classes = [
+		'section',
+		styles.hero,
+		screenContext.loadStatus === 'done' && styles['hero--animate'],
+		screenContext.visited && styles['hero--static'],
+	].filter((c) => c);
 
 	function scrollIconClickHandler() {
 		const featuredWorkSection = document.querySelector('#featured-work');
@@ -32,10 +42,18 @@ function HomeHero(props) {
 	}
 
 	return (
-		<section className={`section ${styles.hero}`}>
+		<section className={classes.join(' ')}>
+			<img
+				className={styles['hero__logo']}
+				src={logo}
+				alt=""
+				loading="eager"
+				aria-hidden="true"
+			/>
+
 			<h1 className={styles['hero__title']}>
-				<span className={styles['hero__title-text']}>Kyle Jorve</span>
-				<small className={styles['hero__subtitle']}>Illustration and Design</small>
+				<span className={styles['hero__title-1']}>Kyle Jorve</span>
+				<small className={styles['hero__title-2']}>Illustration and Design</small>
 			</h1>
 
 			<button

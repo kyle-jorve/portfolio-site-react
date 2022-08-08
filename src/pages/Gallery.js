@@ -1,14 +1,36 @@
+import { useEffect, useCallback, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import useGlobalData from '../hooks/data/global-data';
 import useGalleryData from '../hooks/data/gallery-data';
+import ScreenContext from '../context/screen';
 import styles from '../components/gallery/Gallery.module.css';
 import GalleryItem from '../components/gallery/GalleryItem';
 
 function Gallery() {
+	const screenContext = useContext(ScreenContext);
+	const [reveal, setReveal] = useState(false);
+	const [animationDone, setAnimationDone] = useState(false);
 	const globalData = useGlobalData();
 	const galleryData = useGalleryData();
 	const location = useLocation();
 	const page = globalData.nav.find((p) => p.url === location.pathname);
+	const totalDelay =
+		(galleryData.items.length - 1) * screenContext.transitionDelay +
+		screenContext.transitionDuration;
+
+	const transitionItems = useCallback(() => {
+		setReveal(true);
+
+		setTimeout(() => {
+			setAnimationDone(true);
+		}, totalDelay);
+	}, [totalDelay]);
+
+	useEffect(() => {
+		if (screenContext.loadStatus === 'done') {
+			transitionItems();
+		}
+	}, [transitionItems, screenContext.loadStatus]);
 
 	return (
 		<section className={`section ${styles.gallery}`}>
@@ -26,6 +48,12 @@ function Gallery() {
 							orientation={item.orientation}
 							fromPage={page ? page.pageID : null}
 							fromSection={null}
+							style={{
+								transitionDelay: !animationDone
+									? `${index * screenContext.transitionDelay}ms`
+									: '',
+							}}
+							className={!reveal ? styles['gallery__item--animated'] : ''}
 						/>
 					);
 				})}

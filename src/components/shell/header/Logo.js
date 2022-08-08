@@ -1,17 +1,44 @@
-import CustomLink from '../navigation/CustomLink';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import ScreenContext from '../../../context/screen';
 import logo from '../../../assets/icons-logos/logo-circle.svg';
 import styles from './Header.module.css';
 
 function Logo() {
+	const navigate = useNavigate();
+	const screenContext = useContext(ScreenContext);
+
+	function logoClickHandler(event) {
+		if (screenContext.desktop) {
+			event.preventDefault();
+
+			screenContext.setLoadStatus('in');
+
+			setTimeout(() => {
+				navigate('/');
+
+				screenContext.closeNav();
+
+				screenContext.setLoadStatus('out');
+
+				setTimeout(() => {
+					screenContext.setLoadStatus('done');
+				}, screenContext.longTransitionDuration);
+			}, screenContext.longTransitionDuration);
+		} else if (screenContext.navOpen) {
+			screenContext.closeNav();
+		}
+	}
+
 	return (
-		<CustomLink className={styles['header__logo-cont']} to="/">
+		<Link className={styles['header__logo-cont']} to="/" onClick={logoClickHandler}>
 			<img
 				className={styles['header__logo']}
 				src={logo}
 				alt="The Art of Kyle Jorve logo"
 				loading="eager"
 			/>
-		</CustomLink>
+		</Link>
 	);
 }
 

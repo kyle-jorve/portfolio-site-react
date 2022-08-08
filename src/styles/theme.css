@@ -19,6 +19,7 @@
 	--gray-cool-light: #e4e6e8;
 	--gray-cool: #c1c7c9;
 	--gray-dark: #555f61;
+	--gray-darker: #272b2b;
 	--black-cool: #131516;
 	--yellow: #f4ce56;
 	--red: #ff5652;
@@ -59,6 +60,15 @@
 
 	--transition: var(--transition-dur) var(--transition-ease);
 	--long-transition: calc(var(--transition-dur) * 2) var(--transition-ease);
+
+	/* layout */
+	--logo-width: 60px;
+}
+
+@media (min-width: 40em) {
+	:root {
+		--logo-width: var(--nav-button-width);
+	}
 }
 
 @media (min-width: 64em) {

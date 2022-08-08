@@ -4,13 +4,16 @@ import styles from './Nav.module.css';
 
 function NavButton() {
 	const screenContext = useContext(ScreenContext);
+	const classes = [
+		styles['nav__button'],
+		screenContext.navOpen && styles['nav__button--active'],
+	].filter((c) => c);
 
 	return (
 		<button
+			ref={screenContext.navButtonRef}
 			onClick={screenContext.navToggleHandler}
-			className={`${styles['nav__button']}${
-				screenContext.navOpen ? ` ${styles['nav__button--active']}` : ''
-			}`}
+			className={classes.join(' ')}
 		>
 			<div className={styles['nav__button-blocks']} aria-hidden="true">
 				<span className={styles['nav__button-block']}></span>

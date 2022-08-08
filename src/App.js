@@ -27,11 +27,22 @@ function App() {
 	const navRef = useRef();
 	const screenContext = useContext(ScreenContext);
 	const isDetailPage = useMatch('/gallery/:itemID');
+	const isGalleryPage = useMatch('/gallery/');
+
+	if (isGalleryPage) {
+		body.classList.add('gallery-page');
+	} else {
+		body.classList.remove('gallery-page');
+	}
 
 	useEffect(() => {
 		if (timeout) clearTimeout(timeout);
 
 		screenContext.setLoadStatus('out');
+
+		setTimeout(() => {
+			screenContext.setLoadStatus('done');
+		}, screenContext.longTransitionDuration);
 
 		if (isDetailPage) {
 			body.style.paddingBottom = '';
@@ -46,7 +57,7 @@ function App() {
 				body.style.paddingBottom = '';
 			}
 		}, 200);
-	}, [screenContext.mobile, isDetailPage]);
+	}, [screenContext.mobile, isDetailPage, screenContext.longTransitionDuration]);
 
 	return (
 		<Suspense>

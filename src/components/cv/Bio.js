@@ -11,7 +11,7 @@ function Bio(props) {
 			</div>
 
 			<section className={`section ${styles['bio__content']}`}>
-				<div className="wrapper wrapper--content">
+				<div className="wrapper wrapper--narrow">
 					<div className={styles['bio__img-cont']}>
 						<img
 							className={styles['bio__img']}
