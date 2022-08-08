@@ -118,8 +118,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
-									width="560"
-									height="315"
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/W6acBvEQXug"
 									title="YouTube video player"
 									frameBorder="0"
@@ -185,8 +185,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
-									width="560"
-									height="315"
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/XEaCkUcbfUo"
 									title="YouTube video player"
 									frameBorder="0"
@@ -244,8 +244,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
-									width="560"
-									height="315"
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/CetjOlb5zWk"
 									title="YouTube video player"
 									frameBorder="0"
@@ -310,8 +310,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
-									width="560"
-									height="315"
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/id079cuwXfE"
 									title="YouTube video player"
 									frameBorder="0"
@@ -370,8 +370,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
-									width="560"
-									height="315"
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/FooxBhjNG3E"
 									title="YouTube video player"
 									frameBorder="0"
@@ -438,8 +438,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
-									width="560"
-									height="315"
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/M8TVkpTIlI0"
 									title="YouTube video player"
 									frameBorder="0"
@@ -545,8 +545,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
-									width="560"
-									height="315"
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/_FzmNukhxFo"
 									title="YouTube video player"
 									frameBorder="0"
@@ -617,6 +617,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/oRzRz7eev2c"
 									title="YouTube video player"
 									frameBorder="0"
@@ -812,6 +814,8 @@ function useGalleryData() {
 						{
 							source: (
 								<iframe
+									width="1440"
+									height="810"
 									src="https://www.youtube.com/embed/PxoZ4MjlxOY"
 									title="YouTube video player"
 									frameBorder="0"

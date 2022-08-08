@@ -8,7 +8,7 @@ function GalleryItem(props) {
 	const screenContext = useContext(ScreenContext);
 	const mediaConfig = useThumbnailConfig(props);
 	const mobileImgSrc = require(`../../assets/gallery/${mediaConfig.mobile.url}`);
-	let classes = [styles['gallery__item'], props.className].filter((c) => c);
+	const classes = [styles['gallery__item'], props.className].filter((c) => c);
 
 	function galleryItemClickHandler() {
 		screenContext.setLoadStatus('in');
@@ -58,6 +58,8 @@ function GalleryItem(props) {
 						src={mobileImgSrc}
 						alt={props.thumbnailKey.alt}
 						loading="lazy"
+						fetchpriority="low"
+						onLoad={(event) => event.currentTarget.classList.add(styles.loaded)}
 					/>
 				</picture>
 

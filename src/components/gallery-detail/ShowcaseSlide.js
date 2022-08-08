@@ -20,11 +20,7 @@ function ShowcaseSlide(props) {
 			}}
 			data-index={props.index}
 		>
-			<div
-				className={`${styles['showcase__img-cont']}${
-					props.active ? ` ${styles['showcase__img-cont--active']}` : ''
-				}`}
-			>
+			<div className={styles['showcase__img-cont']}>
 				{!!props.item.source ? (
 					props.item.source
 				) : (

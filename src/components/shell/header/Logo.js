@@ -37,6 +37,7 @@ function Logo() {
 				src={logo}
 				alt="The Art of Kyle Jorve logo"
 				loading="eager"
+				fetchpriority="high"
 			/>
 		</Link>
 	);

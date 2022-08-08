@@ -52,8 +52,8 @@ function FeaturedWork(props) {
 	}, [ioHandler]);
 
 	return (
-		<section ref={sectionRef} className={`section ${styles.featured}`} id={id}>
-			<h2 className={`underline ${styles['featured__title']}`}>Featured Work</h2>
+		<section ref={sectionRef} className="section" id={id}>
+			<h2 className="underline">Featured Work</h2>
 
 			<div className={`${styles['gallery__grid']} ${styles['gallery__grid--featured']}`}>
 				{props.featuredItems.map((item, index) => {

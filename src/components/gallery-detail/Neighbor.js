@@ -36,11 +36,9 @@ function Neighbor(props) {
 		thumbnailKey: props.item.thumbnailKey,
 	});
 	const mobileImg = require(`../../assets/gallery/${thumb.mobile.url}`);
-	const neighborClasses = [
-		styles['neighbor'],
-		styles[`neighbor--${props.direction}`],
-		props.solo && styles['neighbor--solo'],
-	].filter((c) => c);
+	const neighborClasses = [styles['neighbor'], styles[`neighbor--${props.direction}`]].filter(
+		(c) => c
+	);
 
 	return (
 		<article className={neighborClasses.join(' ')}>
@@ -71,6 +69,7 @@ function Neighbor(props) {
 								objectPosition: `center ${props.item.orientation}`,
 							}}
 							loading="lazy"
+							fetchpriority="low"
 						/>
 					</picture>
 				</div>

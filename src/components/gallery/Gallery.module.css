@@ -87,6 +87,21 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	background-color: var(--gray-cool);
+	background-position: 130% 0;
+	background-size: 200% 100%;
+	background-repeat: no-repeat;
+	background-image: linear-gradient(
+		to right,
+		var(--gray-cool) 45%,
+		var(--white-cool),
+		var(--gray-cool) 65%
+	);
+	animation: img-loading 1200ms infinite ease-in-out;
+}
+
+.gallery__img.loaded {
+	animation: none;
 }
 
 .gallery__item-title {
@@ -104,6 +119,14 @@
 	text-transform: uppercase;
 	pointer-events: none;
 	transition: transform var(--transition);
+}
+
+/*----- animations -----*/
+
+@keyframes img-loading {
+	to {
+		background-position: -30% 0;
+	}
 }
 
 /*----- media queries -----*/
@@ -182,20 +205,11 @@
 /*=====----- HOMEPAGE GRID (featured work) -----=====*/
 /*===================================================*/
 
-.gallery__grid--featured {
-}
-
 .gallery__grid--featured .gallery__item:first-child,
 .gallery__grid--featured .gallery__item:nth-child(4n - 1) {
 	grid-column: span 1;
 	grid-row: span 2;
 	aspect-ratio: 5 / 8;
-}
-
-.featured {
-}
-
-.featured__title {
 }
 
 .featured__button-cont {

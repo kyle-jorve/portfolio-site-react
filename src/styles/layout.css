@@ -10,10 +10,6 @@ body {
 	overflow-x: hidden;
 }
 
-body.gallery-page {
-	background: linear-gradient(to bottom, var(--gray-darker), var(--black-cool));
-}
-
 *,
 *::before,
 *::after {
@@ -97,6 +93,8 @@ hr {
 	height: 60px;
 	pointer-events: none;
 }
+
+/*----- media queries -----*/
 
 @media (min-width: 64em) {
 	.flex-line {

@@ -23,7 +23,13 @@ function HomeBio(props) {
 			<div className="wrapper wrapper--wide">
 				<article className={styles['bio-home__content']}>
 					<div className={styles['bio__img-cont']} aria-hidden="true">
-						<img className={styles['bio__img']} src={squareImg} alt="" />
+						<img
+							className={styles['bio__img']}
+							src={squareImg}
+							alt=""
+							loading="lazy"
+							fetchpriority="low"
+						/>
 					</div>
 
 					<div className={styles['bio-home__box']}>
@@ -61,6 +67,7 @@ function HomeBio(props) {
 								src={imgConfig.mobile.src}
 								alt={props.img.alt}
 								loading="lazy"
+								fetchpriority="low"
 							/>
 						</picture>
 					</div>

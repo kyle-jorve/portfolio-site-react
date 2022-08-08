@@ -82,6 +82,7 @@ export function ScreenContextProvider(props) {
 	}
 
 	function returnToOriginPage() {
+		const timeout = desktop ? longTransitionDuration : 0;
 		let page;
 
 		setLoadStatus('in');
@@ -98,7 +99,7 @@ export function ScreenContextProvider(props) {
 			if (!page) return;
 
 			navigate(page.url);
-		}, longTransitionDuration);
+		}, timeout);
 	}
 
 	return (

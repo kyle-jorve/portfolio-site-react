@@ -27,13 +27,6 @@ function App() {
 	const navRef = useRef();
 	const screenContext = useContext(ScreenContext);
 	const isDetailPage = useMatch('/gallery/:itemID');
-	const isGalleryPage = useMatch('/gallery/');
-
-	if (isGalleryPage) {
-		body.classList.add('gallery-page');
-	} else {
-		body.classList.remove('gallery-page');
-	}
 
 	useEffect(() => {
 		if (timeout) clearTimeout(timeout);

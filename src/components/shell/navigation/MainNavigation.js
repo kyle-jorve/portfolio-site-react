@@ -124,9 +124,9 @@ function MainNavigation() {
 				</div>
 			</section>
 
-			<section className={styles['nav__recent-work']}>
+			<section>
 				<div className="wrapper wrapper--section">
-					<h2 className={`flex-line ${styles['nav__recent-work-title']}`}>Recent Work</h2>
+					<h2 className="flex-line">Recent Work</h2>
 
 					<div
 						className={`${galleryStyles['gallery__grid']} ${galleryStyles['gallery__grid--nav']}`}

@@ -7,7 +7,13 @@ function Bio(props) {
 	return (
 		<div className={styles.bio}>
 			<div className={styles['bio__hero']} aria-hidden="true">
-				<img className={styles['bio__bg']} src={heroImg} alt="" loading="eager" />
+				<img
+					className={styles['bio__bg']}
+					src={heroImg}
+					alt=""
+					loading="eager"
+					fetchpriority="low"
+				/>
 			</div>
 
 			<section className={`section ${styles['bio__content']}`}>
@@ -18,6 +24,7 @@ function Bio(props) {
 							src={heroImg}
 							alt={props.heroImg.alt}
 							loading="eager"
+							fetchpriority="low"
 						/>
 					</div>
 
@@ -29,7 +36,14 @@ function Bio(props) {
 				</div>
 			</section>
 
-			<img className="logo-icon" src={logoIcon} alt="" aria-hidden="true" />
+			<img
+				className="logo-icon"
+				src={logoIcon}
+				alt=""
+				aria-hidden="true"
+				loading="lazy"
+				fetchpriority="low"
+			/>
 		</div>
 	);
 }

@@ -48,6 +48,7 @@ function HomeHero(props) {
 				src={logo}
 				alt=""
 				loading="eager"
+				fetchpriority="high"
 				aria-hidden="true"
 			/>
 
@@ -84,6 +85,7 @@ function HomeHero(props) {
 							src={bgConfig.mobile.src}
 							alt=""
 							loading="eager"
+							fetchpriority="high"
 						/>
 					</picture>
 				</div>
@@ -104,6 +106,7 @@ function HomeHero(props) {
 						src={bgConfig.mobile.src}
 						alt=""
 						loading="eager"
+						fetchpriority="high"
 					/>
 				</picture>
 			</div>
