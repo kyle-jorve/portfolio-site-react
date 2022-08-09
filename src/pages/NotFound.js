@@ -3,7 +3,9 @@ import styles from '../components/hero/Hero.module.css';
 
 function NotFound() {
 	return (
-		<section className={`section ${styles.hero} ${styles['hero--short']}`}>
+		<section
+			className={`section ${styles.hero} ${styles['hero--short']} ${styles['hero--content']}`}
+		>
 			<div className="wrapper wrapper--content">
 				<h1 className="underline underline--center">Page Not Found</h1>
 

@@ -1,7 +1,5 @@
 @layer reset, theme, icons, typography, buttons, layout;
 
-@import url('./ie-warning.css');
-
 @import url('./normalize.css') layer(reset);
 @import url('./theme.css') layer(theme);
 @import url('./icons.css') layer(icons);

@@ -88,7 +88,7 @@ a {
 	a {
 		color: inherit;
 		text-decoration: underline var(--accent-color) 2px;
-		text-underline-offset: 1px;
+		text-underline-offset: 2px;
 	}
 }
 

@@ -17,6 +17,10 @@
 	min-height: 56.25vw;
 }
 
+.hero--content {
+	padding-top: 8rem;
+}
+
 .hero__logo {
 	position: absolute;
 	inset: 1rem auto auto 2rem;
@@ -420,7 +424,7 @@
 	}
 }
 
-@media (min-width: 90em) {
+@media (pointer: fine) {
 	.scroll {
 		border-radius: 9999px;
 	}

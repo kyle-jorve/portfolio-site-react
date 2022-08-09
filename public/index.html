@@ -33,62 +33,81 @@
 		/>
 
 		<!-- ICONS -->
-		<link rel="shortcut icon" href="/media/icons/favicons/favicon.ico" type="image/x-icon" />
-		<link rel="icon" href="/media/icons/favicons/favicon.ico" type="image/x-icon" />
+		<link
+			rel="shortcut icon"
+			href="/media/media/icons/favicons/favicon.ico"
+			type="image/x-icon"
+		/>
+		<link rel="icon" href="/media/media/icons/favicons/favicon.ico" type="image/x-icon" />
 		<link
 			rel="apple-touch-icon"
 			sizes="57x57"
-			href="/media/icons/favicons/apple-icon-57x57.png"
+			href="/media/media/icons/favicons/apple-icon-57x57.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="60x60"
-			href="/media/icons/favicons/apple-icon-60x60.png"
+			href="/media/media/icons/favicons/apple-icon-60x60.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="72x72"
-			href="/media/icons/favicons/apple-icon-72x72.png"
+			href="/media/media/icons/favicons/apple-icon-72x72.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="76x76"
-			href="/media/icons/favicons/apple-icon-76x76.png"
+			href="/media/media/icons/favicons/apple-icon-76x76.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="114x114"
-			href="/media/icons/favicons/apple-icon-114x114.png"
+			href="/media/media/icons/favicons/apple-icon-114x114.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="120x120"
-			href="/media/icons/favicons/apple-icon-120x120.png"
+			href="/media/media/icons/favicons/apple-icon-120x120.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="144x144"
-			href="/media/icons/favicons/apple-icon-144x144.png"
+			href="/media/media/icons/favicons/apple-icon-144x144.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="152x152"
-			href="/media/icons/favicons/apple-icon-152x152.png"
+			href="/media/media/icons/favicons/apple-icon-152x152.png"
 		/>
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="/media/icons/favicons/apple-icon-180x180.png"
+			href="/media/media/icons/favicons/apple-icon-180x180.png"
 		/>
 		<link
 			rel="icon"
 			type="image/png"
 			sizes="192x192"
-			href="/media/icons/favicons/android-icon-192x192.png"
+			href="/media/media/icons/favicons/android-icon-192x192.png"
 		/>
-		<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicons/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="96x96" href="/icons/favicons/favicon-96x96.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicons/favicon-16x16.png" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/media/icons/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="96x96"
+			href="/media/icons/favicons/favicon-96x96.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/media/icons/favicons/favicon-16x16.png"
+		/>
 
 		<!-- OPEN GRAPH TAGS -->
 		<meta property="og:type" content="website" />
@@ -107,19 +126,108 @@
 
 		<!-- Font Awesome -->
 		<script src="https://kit.fontawesome.com/867df664d5.js" crossorigin="anonymous"></script>
-
-		<script src="/ie.js"></script>
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
-		<div id="root"></div>
 
+		<!-- IE warning -->
 		<section
 			class="section ie-warning"
 			aria-hidden="true"
-			style="display: none"
 			id="ie-warning"
+			style="display: none"
 		>
+			<style>
+				.ie-warning {
+					position: fixed;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					z-index: 2000;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: #131516;
+					color: #ffffff;
+				}
+
+				.ie-warning .content-box {
+					position: relative;
+					z-index: 1;
+					padding: calc(16px + 2rem) 1rem 2rem;
+					border-radius: 8px;
+					border: 2px solid rgba(255, 255, 255, 0.2);
+					background: rgba(255, 255, 255, 0.05);
+				}
+
+				.ie-warning .content-box::before {
+					position: absolute;
+					inset: -2px -2px auto -2px;
+					display: block;
+					height: 16px;
+					background: #ff5652;
+					border-radius: 8px 8px 0 0;
+					content: '';
+					pointer-events: none;
+				}
+
+				.ie-warning .button-cont {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: center;
+					margin-top: 2rem;
+				}
+
+				.ie-warning .button {
+					display: block;
+					padding: 1.25em 2em;
+					margin: 0.5rem;
+					min-width: 120px;
+					background: #ffffff;
+					box-shadow: 0 6px 24px rgba(19, 21, 22, 0.25);
+					border: 2px solid #30d5a9;
+					border-radius: 4px;
+					font-family: 'Montserrat', sans-serif;
+					font-weight: 800;
+					font-size: 0.675em;
+					line-height: 1.35;
+					letter-spacing: 0.3em;
+					text-decoration: none;
+					text-align: center;
+					text-transform: uppercase;
+					color: #131516;
+					transition: background-color 0.3s ease, color 0.3s ease;
+				}
+
+				.ie-warning .button__text {
+					display: block;
+					margin-top: 1em;
+					font-weight: 800;
+					text-transform: uppercase;
+					letter-spacing: 0.3em;
+					line-height: 1.35;
+				}
+
+				.ie-warning .button__image {
+					display: block;
+					width: 100%;
+					max-width: 4em;
+					max-height: 4em;
+					margin: 0 auto;
+				}
+
+				.ie-warning .button:hover {
+					background-color: #30d5a9;
+				}
+
+				@media (min-width: 64em) {
+					.ie-warning .content-box {
+						padding: calc(16px + 2rem) 2rem 2rem;
+					}
+				}
+			</style>
+
 			<div class="wrapper wrapper--content">
 				<div class="content-box">
 					<h1 class="underline">Whoa There</h1>
@@ -139,7 +247,7 @@
 						>
 							<img
 								class="button__image"
-								src="./icons/chrome-logo.png"
+								src="/media/icons/chrome-logo.png"
 								alt="Google Chrome Logo"
 							/>
 							<span class="button__text">Chrome</span>
@@ -152,7 +260,7 @@
 						>
 							<img
 								class="button__image"
-								src="./icons/firefox-logo.png"
+								src="/media/icons/firefox-logo.png"
 								alt="Firefox Logo"
 							/>
 							<span class="button__text">Firefox</span>
@@ -165,7 +273,7 @@
 						>
 							<img
 								class="button__image"
-								src="./icons/edge-logo.png"
+								src="/media/icons/edge-logo.png"
 								alt="Microsoft Edge Logo"
 							/>
 							<span class="button__text">Edge</span>
@@ -173,15 +281,31 @@
 					</div>
 				</div>
 			</div>
+
+			<script>
+				(function () {
+					var agent = window.navigator.userAgent.toLowerCase();
+					var isIE = agent.indexOf('msie') > -1 || agent.indexOf('trident') > -1;
+					var warning = document.querySelector('#ie-warning');
+
+					if (isIE) {
+						warning.style.display = '';
+						warning.removeAttribute('aria-hidden');
+					}
+				})();
+			</script>
 		</section>
+
+		<div id="root"></div>
 		<!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+        This HTML file is a template.
+        If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        You can add webfonts, meta tags, or analytics to this file.
+        The build step will place the bundled scripts into the <body> tag.
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    --></body>
+        To begin the development, run `npm start` or `yarn start`.
+        To create a production bundle, use `npm run build` or `yarn build`.
+        -->
+	</body>
 </html>
