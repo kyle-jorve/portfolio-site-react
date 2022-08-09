@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import ScreenContext from './screen';
 
 const DetailPageContext = React.createContext({
 	activeSlideIndex: 0,
 });
 
 export function DetailPageContextProvider(props) {
+	const screenContext = useContext(ScreenContext);
 	const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
 	function goToPrevSlide(slidesLength) {
@@ -28,7 +30,13 @@ export function DetailPageContextProvider(props) {
 	}
 
 	function resetSlideIndex() {
-		setActiveSlideIndex(0);
+		if (!screenContext.desktop) {
+			setActiveSlideIndex(0);
+		} else {
+			setTimeout(() => {
+				setActiveSlideIndex(0);
+			}, screenContext.longTransitionDuration);
+		}
 	}
 
 	return (

@@ -573,12 +573,12 @@ function useGalleryData() {
 								</p>
 							</blockquote>
 							<p>
-								Yet another iteration of my original character,
+								Yet another iteration of my original character,{' '}
 								<CustomLink to="/gallery/crows">Crow</CustomLink>.
 							</p>
 							<p>
-								Crow is a professional assassin and the protagonist of a science
-								fiction story in progress called
+								Crow is a professional assassin and the protagonist of an
+								in-progress science fiction story called{' '}
 								<strong>
 									<i>Post-Autumn</i>
 								</strong>
@@ -706,10 +706,10 @@ function useGalleryData() {
 								villain.
 							</p>
 							<p>
-								He plays a critical role in the
+								He plays a critical role in the{' '}
 								<strong>
 									<i>Ignoble Blood</i>
-								</strong>
+								</strong>{' '}
 								series, which is a fantasy story in progress. In it, Berned
 								apprehends a woman named Sol Ferro and charges her with the crime of
 								murdering <CustomLink to="/gallery/becoming-runa">Luna</CustomLink>,
@@ -782,10 +782,10 @@ function useGalleryData() {
 								</p>
 							</blockquote>
 							<p>
-								The character depicted here is a protagonist of the
+								The character depicted here is a protagonist of the{' '}
 								<strong>
 									<i>Ignoble Blood</i>
-								</strong>
+								</strong>{' '}
 								series, which is a work of fantasy in progress. Fennory is his real
 								name, but by this point in the story he goes by the alias of Luna,
 								as he is hiding from a powerful enemy.
@@ -845,7 +845,7 @@ function useGalleryData() {
 							<p>
 								<CustomLink to="/gallery/crow">Crow</CustomLink> is a professional
 								assassin and the protagonist of an in-progress science fiction story
-								called
+								called{' '}
 								<strong>
 									<i>Post-Autumn</i>
 								</strong>
@@ -882,8 +882,8 @@ function useGalleryData() {
 						<Fragment>
 							<p>
 								<strong>
-									Part of a duology. Its companion,
-									<i>Where Fears and Lies Melt Away</i>, can be found
+									Part of a duology. Its companion,{' '}
+									<i>Where Fears and Lies Melt Away</i>, can be found{' '}
 									<CustomLink to="/gallery/kingdom-hearts-2">here</CustomLink>.
 								</strong>
 							</p>
@@ -913,8 +913,8 @@ function useGalleryData() {
 						<Fragment>
 							<p>
 								<strong>
-									Part of a duology. Its companion,
-									<em>The Future Doesn't Scare Me</em>, can be found
+									Part of a duology. Its companion,{' '}
+									<em>The Future Doesn't Scare Me</em>, can be found{' '}
 									<CustomLink to="/gallery/kingdom-hearts-1">here</CustomLink>.
 								</strong>
 							</p>
