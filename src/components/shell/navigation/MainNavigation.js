@@ -73,6 +73,9 @@ function MainNavigation() {
 							index={index}
 							url={item.url}
 							onClick={screenContext.closeNav}
+							attributes={{
+								tabIndex: screenContext.navOpen ? null : -1,
+							}}
 						>
 							{item.pageName}
 						</NavItem>
@@ -96,6 +99,9 @@ function MainNavigation() {
 										? `${index * screenContext.transitionDelay}ms`
 										: '',
 								}}
+								attributes={{
+									tabIndex: screenContext.navOpen ? null : -1,
+								}}
 							>
 								{!!item.icon && item.icon}
 							</SocialIcon>
@@ -115,6 +121,9 @@ function MainNavigation() {
 									transitionDelay: !socialIconsAnimationDone
 										? `${index * screenContext.transitionDelay}ms`
 										: '',
+								}}
+								attributes={{
+									tabIndex: screenContext.navOpen ? null : -1,
 								}}
 							>
 								{!!item.icon && item.icon}
@@ -152,6 +161,9 @@ function MainNavigation() {
 										transitionDelay: !galleryAnimationDone
 											? `${index * screenContext.transitionDelay}ms`
 											: '',
+									}}
+									attributes={{
+										tabIndex: screenContext.navOpen ? null : -1,
 									}}
 								/>
 							);

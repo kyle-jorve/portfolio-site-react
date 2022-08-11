@@ -1,8 +1,11 @@
+import { useContext } from 'react';
 import SocialIcon from '../icons/SocialIcon';
+import ScreenContext from '../../../context/screen';
 import styles from './Footer.module.css';
 import socialStyles from '../icons/Social.module.css';
 
 function FooterIcons(props) {
+	const screenContext = useContext(ScreenContext);
 	const iconsLength = props.socialIcons.standard.length + props.socialIcons.commerce.length;
 	let ratio = [1, 1];
 
@@ -24,7 +27,14 @@ function FooterIcons(props) {
 			>
 				{props.socialIcons.standard.map((item, index) => {
 					return (
-						<SocialIcon key={index} name={item.name} url={item.url}>
+						<SocialIcon
+							key={index}
+							name={item.name}
+							url={item.url}
+							attributes={{
+								tabIndex: screenContext.navOpen ? -1 : null,
+							}}
+						>
 							{!!item.icon && item.icon}
 						</SocialIcon>
 					);
@@ -36,7 +46,14 @@ function FooterIcons(props) {
 			>
 				{props.socialIcons.commerce.map((item, index) => {
 					return (
-						<SocialIcon key={index} name={item.name} url={item.url}>
+						<SocialIcon
+							key={index}
+							name={item.name}
+							url={item.url}
+							attributes={{
+								tabIndex: screenContext.navOpen ? -1 : null,
+							}}
+						>
 							{!!item.icon && item.icon}
 						</SocialIcon>
 					);

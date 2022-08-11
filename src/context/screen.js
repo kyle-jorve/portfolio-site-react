@@ -54,11 +54,12 @@ export function ScreenContextProvider(props) {
 	}, []);
 
 	function navToggleHandler() {
+		navButtonRef.current.blur();
 		navButtonRef.current.style.pointerEvents = 'none';
 
 		setTimeout(() => {
 			navButtonRef.current.style.pointerEvents = '';
-		}, transitionDuration + [...globalData.socialIcons.standard, ...globalData.socialIcons.commerce].length * 100);
+		}, transitionDuration + (globalData.socialIcons.standard.length + globalData.socialIcons.commerce.length) * 100);
 
 		setNavOpen((prev) => {
 			if (!prev) {

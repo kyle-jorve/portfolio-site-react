@@ -56,6 +56,10 @@
 	background-color: var(--light-color);
 }
 
+.nav__button--active:focus {
+	outline-color: var(--light-color);
+}
+
 .nav__button--active .nav__button-block {
 	background-color: var(--accent-color);
 }

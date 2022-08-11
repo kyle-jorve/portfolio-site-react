@@ -1,7 +1,11 @@
+import { useContext } from 'react';
+import ScreenContext from '../context/screen';
 import CustomLink from '../components/shell/navigation/CustomLink';
 import styles from '../components/hero/Hero.module.css';
 
 function NotFound() {
+	const screenContext = useContext(ScreenContext);
+
 	return (
 		<section
 			className={`section ${styles.hero} ${styles['hero--short']} ${styles['hero--content']}`}
@@ -11,7 +15,15 @@ function NotFound() {
 
 				<p>
 					I'm not sure how you ended up here, but click{' '}
-					<CustomLink to="/">here</CustomLink> to return to safe ground.
+					<CustomLink
+						to="/"
+						attributes={{
+							tabIndex: screenContext.navOpen ? -1 : null,
+						}}
+					>
+						here
+					</CustomLink>{' '}
+					to return to safe ground.
 				</p>
 			</div>
 		</section>

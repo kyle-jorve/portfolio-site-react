@@ -16,14 +16,6 @@
 	}
 }
 
-/*----- animations -----*/
-
-@keyframes img-loading {
-	to {
-		background-position: -30% 0;
-	}
-}
-
 /*====================================*/
 /*=====----- MEDIA SHOWCASE -----=====*/
 /*====================================*/
@@ -119,22 +111,6 @@
 
 .showcase__img {
 	width: 100%;
-	background-color: var(--gray-cool);
-	background-position: 130% 0;
-	background-size: 200% 100%;
-	background-repeat: no-repeat;
-	background-image: linear-gradient(
-		to right,
-		var(--gray-cool) 45%,
-		var(--white-cool),
-		var(--gray-cool) 65%
-	);
-	animation: img-loading 1200ms infinite ease-in-out;
-}
-
-.showcase__img.loaded {
-	animation: none;
-	background: none;
 }
 
 /*----- videos -----*/

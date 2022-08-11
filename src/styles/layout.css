@@ -94,6 +94,35 @@ hr {
 	pointer-events: none;
 }
 
+/*----- lazy-loaded images -----*/
+
+.img--lazy {
+	background-color: var(--gray-cool);
+	background-position: 130% 0;
+	background-size: 200% 100%;
+	background-repeat: no-repeat;
+	background-image: linear-gradient(
+		to right,
+		var(--gray-cool) 45%,
+		var(--white-cool),
+		var(--gray-cool) 65%
+	);
+	animation: img-loading 1200ms infinite ease-in-out;
+}
+
+.img--lazy.loaded {
+	background: none;
+	animation: none;
+}
+
+/*----- animations -----*/
+
+@keyframes img-loading {
+	to {
+		background-position: -30% 0;
+	}
+}
+
 /*----- media queries -----*/
 
 @media (min-width: 64em) {

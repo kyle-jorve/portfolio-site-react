@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+import ScreenContext from '../../context/screen';
 import CVItem from './CVItem';
 import styles from './CV.module.css';
 
 function Resume(props) {
+	const screenContext = useContext(ScreenContext);
 	const resume = require(`../../assets/${props.resume.docUrl}`);
 
 	return (
@@ -17,6 +20,7 @@ function Resume(props) {
 							className="button button--primary button--download"
 							href={resume}
 							download
+							tabIndex={screenContext.navOpen ? -1 : null}
 						>
 							Download
 						</a>

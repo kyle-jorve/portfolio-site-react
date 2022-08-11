@@ -20,12 +20,12 @@ function ShowcasePicture(props) {
 			})}
 
 			<img
-				className={styles['showcase__img']}
+				className={`img--lazy ${styles['showcase__img']}`}
 				src={imgSrc}
 				alt={props.alt}
 				loading="eager"
 				fetchpriority="high"
-				onLoad={(event) => event.currentTarget.classList.add(styles.loaded)}
+				onLoad={(event) => event.currentTarget.classList.add('loaded')}
 			/>
 		</picture>
 	);

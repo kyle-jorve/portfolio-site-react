@@ -17,6 +17,7 @@ function SocialIcon(props) {
 			title={props.name}
 			aria-label={props.name}
 			style={props.style}
+			{...props.attributes}
 		>
 			{props.children}
 		</a>

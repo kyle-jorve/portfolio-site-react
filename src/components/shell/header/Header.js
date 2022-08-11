@@ -1,8 +1,7 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { useMatch } from 'react-router-dom';
 import ScreenContext from '../../../context/screen';
 import Logo from './Logo';
-import MainNavigation from '../navigation/MainNavigation';
 import NavButton from '../navigation/NavButton';
 import styles from './Header.module.css';
 
@@ -19,15 +18,11 @@ function Header() {
 	].filter((c) => c);
 
 	return (
-		<Fragment>
-			<header className={classes.join(' ')}>
-				<Logo />
+		<header className={classes.join(' ')}>
+			<Logo />
 
-				{!screenContext.mobile && <NavButton />}
-			</header>
-
-			<MainNavigation />
-		</Fragment>
+			{!screenContext.mobile && <NavButton />}
+		</header>
 	);
 }
 

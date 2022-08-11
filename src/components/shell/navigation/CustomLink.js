@@ -32,7 +32,12 @@ function CustomLink(props) {
 	}
 
 	return (
-		<Link className={props.className} to={props.to} onClick={linkClickHandler}>
+		<Link
+			className={props.className}
+			to={props.to}
+			onClick={linkClickHandler}
+			{...props.attributes}
+		>
 			{props.children}
 		</Link>
 	);

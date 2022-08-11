@@ -26,6 +26,9 @@ const MobileNavigation = React.forwardRef((props, ref) => {
 						className={`${styles[`mobile-nav__item--${item.pageID}`]} ${
 							styles['mobile-nav__item']
 						}`}
+						attributes={{
+							tabIndex: screenContext.navOpen ? -1 : null,
+						}}
 					>
 						<span className={styles['mobile-nav__label']}>{item.pageName}</span>
 					</NavItem>

@@ -75,13 +75,22 @@ function FeaturedWork(props) {
 										? `${index * screenContext.transitionDelay}ms`
 										: '',
 								}}
+								attributes={{
+									tabIndex: screenContext.navOpen ? -1 : null,
+								}}
 							/>
 						);
 					})}
 				</div>
 
 				<div className={styles['featured__button-cont']}>
-					<CustomLink className="button button--primary" to="/gallery">
+					<CustomLink
+						className="button button--primary"
+						to="/gallery"
+						attributes={{
+							tabIndex: screenContext.navOpen ? -1 : null,
+						}}
+					>
 						View Gallery
 					</CustomLink>
 				</div>

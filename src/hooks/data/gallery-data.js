@@ -263,7 +263,7 @@ function useGalleryData() {
 						<Fragment>
 							<p>
 								<strong>Pendrake Sommer</strong> is the main protagonist of the
-								in-progress fantasy novel, <i>The Order of Ashes</i>, and twin
+								in-progress fantasy novel, <i>The Ashes of Hope</i>, and twin
 								brother to <CustomLink to="/gallery/talis">Talis Sommer</CustomLink>
 								.
 							</p>
@@ -390,7 +390,7 @@ function useGalleryData() {
 							<p>
 								<strong>Talis Sommer</strong> is the twin sister of the
 								<CustomLink to="/gallery/pendrake">main protagonist</CustomLink> in
-								the story I'm currently writing, <i>The Order of Ashes</i>. She is
+								the story I'm currently writing, <i>The Ashes of Hope</i>. She is
 								the lady of the Tersing duchy, daughter of the duke and sister to
 								the heir of the dukedom.
 							</p>

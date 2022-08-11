@@ -54,6 +54,9 @@ function Gallery() {
 									: '',
 							}}
 							className={!reveal ? styles['gallery__item--animated'] : ''}
+							attributes={{
+								tabIndex: screenContext.navOpen ? -1 : null,
+							}}
 						/>
 					);
 				})}

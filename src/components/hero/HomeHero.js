@@ -61,6 +61,7 @@ function HomeHero(props) {
 				className={styles['scroll']}
 				aria-label="scroll to Featured Work"
 				onClick={scrollIconClickHandler}
+				tabIndex={screenContext.navOpen ? -1 : null}
 			>
 				<span className={styles['scroll__track']}>
 					<span className={styles['scroll__ball']}></span>

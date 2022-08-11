@@ -70,6 +70,7 @@ function NavItem(props) {
 						? `${props.index * 100}ms`
 						: '',
 			}}
+			{...props.attributes}
 		>
 			{props.children}
 		</a>
@@ -90,6 +91,7 @@ function NavItem(props) {
 						? `${props.index * screenContext.transitionDelay}ms`
 						: '',
 			}}
+			{...props.attributes}
 		>
 			{props.children}
 		</NavLink>

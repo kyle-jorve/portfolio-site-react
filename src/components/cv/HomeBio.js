@@ -44,6 +44,9 @@ function HomeBio(props) {
 								className="button button--primary"
 								to={props.url}
 								onClick={() => screenContext.setToSection('resume')}
+								attributes={{
+									tabIndex: screenContext.navOpen ? -1 : null,
+								}}
 							>
 								See R&eacute;sum&eacute;
 							</CustomLink>

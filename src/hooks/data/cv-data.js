@@ -1,28 +1,7 @@
-import { Fragment, useContext } from 'react';
-import useGlobalData from './global-data';
-import ScreenContext from '../../context/screen';
-import { useLocation } from 'react-router-dom';
-import CustomLink from '../../components/shell/navigation/CustomLink';
+import { Fragment } from 'react';
 import styles from '../../components/cv/CV.module.css';
 
 function useCVData() {
-	const globalData = useGlobalData();
-	const screenContext = useContext(ScreenContext);
-	const location = useLocation();
-	const page = globalData.nav.find((p) => p.url === location.pathname);
-
-	function setPageContext() {
-		if (!page) return;
-
-		screenContext.setFromPage(page.pageID);
-
-		if (page.pageID === 'home') {
-			screenContext.setFromSection('bio');
-		} else {
-			screenContext.setFromSection(null);
-		}
-	}
-
 	return {
 		get heroImg() {
 			return {

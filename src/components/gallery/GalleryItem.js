@@ -36,6 +36,7 @@ function GalleryItem(props) {
 				className={styles['gallery__item-link']}
 				to={`/gallery/${props.name}`}
 				onClick={galleryItemClickHandler}
+				attributes={props.attributes}
 			>
 				<picture>
 					{mediaConfig.sources.map((src, index) => {
@@ -51,7 +52,7 @@ function GalleryItem(props) {
 					})}
 
 					<img
-						className={styles['gallery__img']}
+						className={`img--lazy ${styles['gallery__img']}`}
 						style={{
 							objectPosition: `center ${props.orientation}`,
 						}}
@@ -59,7 +60,7 @@ function GalleryItem(props) {
 						alt={props.thumbnailKey.alt}
 						loading="lazy"
 						fetchpriority="low"
-						onLoad={(event) => event.currentTarget.classList.add(styles.loaded)}
+						onLoad={(event) => event.currentTarget.classList.add('loaded')}
 					/>
 				</picture>
 
