@@ -14,6 +14,9 @@ function NavButton() {
 			ref={screenContext.navButtonRef}
 			onClick={screenContext.navToggleHandler}
 			className={classes.join(' ')}
+			aria-controls="main-navigation"
+			aria-label="toggle main navigation"
+			aria-expanded={screenContext.navOpen}
 		>
 			<div className={styles['nav__button-blocks']} aria-hidden="true">
 				<span className={styles['nav__button-block']}></span>

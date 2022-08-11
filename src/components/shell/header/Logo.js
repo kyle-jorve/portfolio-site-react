@@ -31,7 +31,12 @@ function Logo() {
 	}
 
 	return (
-		<Link className={styles['header__logo-cont']} to="/" onClick={logoClickHandler}>
+		<Link
+			className={styles['header__logo-cont']}
+			to="/"
+			onClick={logoClickHandler}
+			aria-label="go to home page"
+		>
 			<img
 				className={styles['header__logo']}
 				src={logo}

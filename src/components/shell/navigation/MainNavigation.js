@@ -62,7 +62,11 @@ function MainNavigation() {
 	}, [screenContext.navOpen, totalDelay.icons, totalDelay.gallery]);
 
 	return (
-		<nav className={classes.join(' ')} aria-hidden={!screenContext.navOpen}>
+		<nav
+			className={classes.join(' ')}
+			aria-hidden={!screenContext.navOpen}
+			id="main-navigation"
+		>
 			<section className={styles['nav__inner']}>
 				{navItems.map((item, index) => {
 					return (
