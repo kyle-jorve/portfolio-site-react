@@ -9,6 +9,53 @@ function useGalleryData() {
 		get items() {
 			return [
 				{
+					name: 'toval-portrait',
+					title: 'Toval Argensente Portrait',
+					content: (
+						<blockquote className="blockquote">
+							<p>
+								Patience is the wise warrior's strongest virtue. It will guard you
+								from wounds as surely as armor. It will give you insight that others
+								are less keen to seek out. Now, recall the fight you just witnessed
+								and ask yourselves what quality Talis lacked, and what that lack
+								cost her. She'll be nursing her new wounds for days, simply because
+								she could not wait for an opening.
+							</p>
+						</blockquote>
+					),
+					orientation: 'center',
+					featured: true,
+					purchaseLink:
+						'https://www.inprnt.com/gallery/kylejorve/toval-argensente-portrait/',
+					downloadLink: 'https://kylejorve.gumroad.com/l/vcwgb',
+					thumbnailKey: {
+						path: 'toval-portrait/final/kyle-jorve_toval-portrait',
+						alt: 'a portrait of Toval Argensente',
+					},
+					detailKeys: [
+						{
+							path: 'toval-portrait/final/kyle-jorve_toval-portrait',
+							alt: 'a portrait of Toval Argensente',
+						},
+						{
+							path: 'toval-portrait/wip-1/kyle-jorve_toval-portrait-wip-1',
+							alt: `a progress snapshot of Toval Argensente's portrait in which the line drawing is complete`,
+						},
+						{
+							path: 'toval-portrait/wip-2/kyle-jorve_toval-portrait-wip-2',
+							alt: `a progress snapshot of Toval Argensente's portrait in which the flat colors have been applied`,
+						},
+						{
+							path: 'toval-portrait/wip-3/kyle-jorve_toval-portrait-wip-3',
+							alt: `a progress snapshot of Toval Argensente's portrait in which the light and shadows have been applied and colorized`,
+						},
+						{
+							path: 'toval-portrait/wip-4/kyle-jorve_toval-portrait-wip-4',
+							alt: `a progress snapshot of Toval Argensente's portrait in which the painting is nearly finished`,
+						},
+					],
+				},
+				{
 					name: 'toval-argensente',
 					title: 'Toval Argensente',
 					content: (
@@ -36,6 +83,8 @@ function useGalleryData() {
 					),
 					orientation: 'top',
 					featured: true,
+					purchaseLink: 'https://www.inprnt.com/gallery/kylejorve/toval-argensente/',
+					downloadLink: 'https://kylejorve.gumroad.com/l/ogpkj',
 					thumbnailKey: {
 						path: 'toval/final/kyle-jorve_toval',
 						alt: 'a vignette of Toval Argensente, looking menacingly toward the viewer with a sword in her left hand pointed to the ground',
