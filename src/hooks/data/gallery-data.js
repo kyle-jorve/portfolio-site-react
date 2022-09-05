@@ -53,6 +53,19 @@ function useGalleryData() {
 							path: 'toval-portrait/wip-4/kyle-jorve_toval-portrait-wip-4',
 							alt: `a progress snapshot of Toval Argensente's portrait in which the painting is nearly finished`,
 						},
+						{
+							source: (
+								<iframe
+									width="1440"
+									height="810"
+									src="https://www.youtube.com/embed/hDk6yKcQYqI"
+									title="YouTube video player"
+									frameBorder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowFullScreen
+								></iframe>
+							),
+						},
 					],
 				},
 				{
@@ -113,6 +126,19 @@ function useGalleryData() {
 						{
 							path: 'toval/wip-5/kyle-jorve_toval-wip-5',
 							alt: `a progress snapshot of Toval's vignette in which the painting is nearly finished`,
+						},
+						{
+							source: (
+								<iframe
+									width="1440"
+									height="810"
+									src="https://www.youtube.com/embed/js4NRjOnPbA"
+									title="YouTube video player"
+									frameBorder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowFullScreen
+								></iframe>
+							),
 						},
 					],
 				},
