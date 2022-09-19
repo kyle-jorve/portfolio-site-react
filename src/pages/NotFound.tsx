@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import ScreenContext from '../context/screen';
-import CustomLink from '../components/shell/navigation/CustomLink';
+import CustomLink from '../components/shell/navigation';
 import styles from '../components/hero/Hero.module.css';
 
 function NotFound() {

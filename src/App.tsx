@@ -2,11 +2,11 @@ import React, { Suspense, useContext, useEffect, useRef } from 'react';
 import { Route, Routes, useMatch } from 'react-router-dom';
 import ScreenContext from './context/screen';
 import Home from './pages/Home';
-import Header from './components/shell/header/Header';
-import MainNavigation from './components/shell/navigation/MainNavigation';
-import DetailHeader from './components/shell/header/DetailHeader';
+import Header from './components/shell/header';
+import MainNavigation from './components/shell/navigation';
+import DetailHeader from './components/shell/header';
 import Footer from './components/shell/footer/Footer';
-import MobileNavigation from './components/shell/navigation/MobileNavigation';
+import MobileNavigation from './components/shell/navigation';
 import Loader from './components/shell/loader/Loader';
 
 const body = document.querySelector('body');

@@ -4,7 +4,7 @@ import useGlobalData from '../hooks/data/global-data';
 import useGalleryData from '../hooks/data/gallery-data';
 import ScreenContext from '../context/screen';
 import styles from '../components/gallery/Gallery.module.css';
-import GalleryItem from '../components/gallery/GalleryItem';
+import GalleryItem from '../components/gallery';
 
 function Gallery() {
 	const screenContext = useContext(ScreenContext);

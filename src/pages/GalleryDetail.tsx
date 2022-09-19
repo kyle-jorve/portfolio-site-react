@@ -1,8 +1,8 @@
 import { DetailPageContextProvider } from '../context/detail-page';
 import useGalleryData from '../hooks/data/gallery-data';
 import { useParams } from 'react-router-dom';
-import MediaShowcase from '../components/gallery-detail/MediaShowcase';
-import ContentShowcase from '../components/gallery-detail/ContentShowcase';
+import MediaShowcase from '../components/gallery-detail';
+import ContentShowcase from '../components/gallery-detail';
 import styles from '../components/gallery-detail/Showcase.module.css';
 
 function GalleryDetail() {

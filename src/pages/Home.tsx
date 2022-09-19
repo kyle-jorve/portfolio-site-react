@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useContext } from 'react';
 import ScreenContext from '../context/screen';
-import FeaturedWork from '../components/gallery/FeaturedWork';
+import FeaturedWork from '../components/gallery';
 import HomeHero from '../components/hero/HomeHero';
-import HomeBio from '../components/cv/HomeBio';
+import HomeBio from '../components/cv';
 import useGlobalData from '../hooks/data/global-data';
 import { homeData } from '../hooks/data/home-data';
 import useCVData from '../hooks/data/cv-data';

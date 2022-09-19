@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import CustomLink from '../../components/shell/navigation/CustomLink';
+import CustomLink from '../../components/shell/navigation';
 
 function useGalleryData() {
 	return {
