@@ -1,12 +1,20 @@
+import { SocialIconType } from '../../../hooks/data/global-data';
 import styles from './Social.module.css';
 
-function SocialIcon(props) {
+type SocialIconProps = {
+	className?: string;
+	attributes?: {
+		tabIndex: number | undefined;
+	};
+	style?: {
+		[prop: string]: string;
+	};
+} & SocialIconType &
+	React.PropsWithChildren;
+
+function SocialIcon(props: SocialIconProps) {
 	const iconClass = props.name;
-	const classes = [
-		props.className,
-		styles['social__item'],
-		!props.icon && `icon icon--${iconClass}`,
-	].filter((c) => c);
+	const classes = [props.className, styles['social__item'], !props.icon && `icon icon--${iconClass}`].filter(c => c);
 
 	return (
 		<a

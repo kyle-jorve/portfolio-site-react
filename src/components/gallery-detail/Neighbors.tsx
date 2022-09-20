@@ -1,20 +1,27 @@
 import Neighbor from './Neighbor';
-import useGalleryData from '../../hooks/data/gallery-data';
+import useGalleryData, { GalleryItemType } from '../../hooks/data/gallery-data';
 import styles from './Showcase.module.css';
 
-function Neighbors(props) {
+type NeighborsProps = {
+	item: GalleryItemType;
+};
+
+function Neighbors(props: NeighborsProps) {
 	const galleryData = useGalleryData();
-	const itemIndex = galleryData.items.findIndex((item) => item.name === props.item.name);
-	const neighbors = {
+	const itemIndex = galleryData.items.findIndex(item => item.name === props.item.name);
+	const neighbors: {
+		next: (GalleryItemType & { isDetail?: boolean }) | null;
+		prev: (GalleryItemType & { isDetail?: boolean }) | null;
+	} = {
 		next: galleryData.items[itemIndex + 1],
 		prev: galleryData.items[itemIndex - 1],
 	};
-	const solo = Object.values(neighbors).filter((val) => val).length < 2;
+	let key: keyof typeof neighbors;
 
-	for (let key in neighbors) {
+	for (key in neighbors) {
 		if (!neighbors[key]) continue;
 
-		neighbors[key].isDetail = true;
+		neighbors[key]!.isDetail = true;
 	}
 
 	return (
@@ -24,7 +31,7 @@ function Neighbors(props) {
 
 				if (!value) return '';
 
-				return <Neighbor key={index} direction={key} solo={solo} item={value} />;
+				return <Neighbor key={index} direction={key} item={value} />;
 			})}
 		</div>
 	);

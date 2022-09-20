@@ -2,21 +2,30 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ScreenContext from '../../../context/screen';
 
-function CustomLink(props) {
+type CustomLinkProps = {
+	onClick?: React.MouseEventHandler;
+	to: string;
+	className?: string;
+	attributes?: {
+		tabIndex?: number | undefined;
+	};
+} & React.PropsWithChildren;
+
+function CustomLink(props: CustomLinkProps) {
 	const onClick = props.onClick || (() => {});
 	const navigate = useNavigate();
 	const screenContext = useContext(ScreenContext);
 
-	function linkClickHandler(event) {
+	function linkClickHandler(event: React.MouseEvent) {
 		if (!screenContext.desktop) {
-			onClick();
+			onClick(event);
 
 			return;
 		}
 
 		event.preventDefault();
 
-		onClick();
+		onClick(event);
 
 		screenContext.setLoadStatus('in');
 
@@ -32,12 +41,7 @@ function CustomLink(props) {
 	}
 
 	return (
-		<Link
-			className={props.className}
-			to={props.to}
-			onClick={linkClickHandler}
-			{...props.attributes}
-		>
+		<Link className={props.className} to={props.to} onClick={linkClickHandler} {...props.attributes}>
 			{props.children}
 		</Link>
 	);

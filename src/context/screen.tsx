@@ -2,9 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useGlobalData from '../hooks/data/global-data';
 
+type ScreenContextType = {
+	[prop: string]: any;
+};
+
 const resizeEvents = ['resize', 'orientationchange'];
 const breakpoints = [640, 1024];
-const ScreenContext = React.createContext({
+const ScreenContext = React.createContext<ScreenContextType>({
 	mobile: true,
 	navOpen: false,
 	fromPage: 'home',
@@ -12,8 +16,8 @@ const ScreenContext = React.createContext({
 	loadStatus: 'idle',
 });
 
-export function ScreenContextProvider(props) {
-	const navButtonRef = useRef();
+export function ScreenContextProvider(props: React.PropsWithChildren) {
+	const navButtonRef = useRef<HTMLButtonElement>();
 	const globalData = useGlobalData();
 	const pages = globalData.nav;
 	const [visited, setVisited] = useState(false);
@@ -46,22 +50,22 @@ export function ScreenContextProvider(props) {
 
 		resizeHandler();
 
-		resizeEvents.forEach((ev) => window.addEventListener(ev, resizeHandler));
+		resizeEvents.forEach(ev => window.addEventListener(ev, resizeHandler));
 
 		return () => {
-			resizeEvents.forEach((ev) => window.removeEventListener(ev, resizeHandler));
+			resizeEvents.forEach(ev => window.removeEventListener(ev, resizeHandler));
 		};
 	}, []);
 
 	function navToggleHandler() {
-		navButtonRef.current.blur();
-		navButtonRef.current.style.pointerEvents = 'none';
+		navButtonRef.current!.blur();
+		navButtonRef.current!.style.pointerEvents = 'none';
 
 		setTimeout(() => {
-			navButtonRef.current.style.pointerEvents = '';
+			navButtonRef.current!.style.pointerEvents = '';
 		}, transitionDuration + (globalData.socialIcons.standard.length + globalData.socialIcons.commerce.length) * 100);
 
-		setNavOpen((prev) => {
+		setNavOpen(prev => {
 			if (!prev) {
 				setNavRevealed(true);
 			} else {
@@ -95,7 +99,7 @@ export function ScreenContextProvider(props) {
 				return;
 			}
 
-			page = pages.find((p) => p.pageID === fromPage);
+			page = pages.find(p => p.pageID === fromPage);
 
 			if (!page) return;
 

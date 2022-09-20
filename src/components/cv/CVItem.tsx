@@ -1,7 +1,13 @@
 import { Fragment } from 'react';
 import styles from './CV.module.css';
 
-function CVItem(props) {
+type CVItemProps = {
+	title: string;
+	content: JSX.Element;
+	showHR: boolean;
+};
+
+function CVItem(props: CVItemProps) {
 	return (
 		<Fragment>
 			<div>

@@ -3,26 +3,38 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import ScreenContext from '../../../context/screen';
 import styles from './Nav.module.css';
 
-let timeout;
+type NavItemProps = {
+	onClick?: React.MouseEventHandler;
+	url: string;
+	totalDelay?: number;
+	isMobile?: boolean;
+	className?: string;
+	isMainNav?: boolean;
+	index: number;
+	attributes?: {
+		tabIndex: number | undefined;
+	};
+	style?: {
+		[prop: string]: string;
+	};
+} & React.PropsWithChildren;
 
-function NavItem(props) {
+let timeout: ReturnType<typeof setTimeout>;
+
+function NavItem(props: NavItemProps) {
 	const navigate = useNavigate();
 	const [navItemsAnimationDone, setNavItemsAnimationDone] = useState(false);
 	const screenContext = useContext(ScreenContext);
 	const onClick = props.onClick || (() => {});
-	const url = new URL(
-		props.url.includes('http')
-			? props.url
-			: `${window.location.protocol}//${window.location.host}${props.url}`
-	);
+	const url = new URL(props.url.includes('http') ? props.url : `${window.location.protocol}//${window.location.host}${props.url}`);
 	const curHost = window.location.host;
 	const externalLink = curHost !== url.host;
 	const totalDelay = props.totalDelay;
-	let classes = [!props.isMobile && styles['nav__a'], props.className];
+	let classes = [!props.isMobile && styles['nav__a'], props.className].filter(c => c);
 
-	function navLinkClickHandler(event) {
+	function navLinkClickHandler(event: React.MouseEvent) {
 		if (!screenContext.desktop) {
-			onClick();
+			onClick(event);
 
 			return;
 		}
@@ -34,7 +46,7 @@ function NavItem(props) {
 		setTimeout(() => {
 			navigate(props.url);
 
-			onClick();
+			onClick(event);
 
 			screenContext.setLoadStatus('out');
 
@@ -65,10 +77,7 @@ function NavItem(props) {
 			rel="noopener noreferrer"
 			className={classes.join(' ')}
 			style={{
-				transitionDelay:
-					props.isMainNav && !navItemsAnimationDone && screenContext.desktop
-						? `${props.index * 100}ms`
-						: '',
+				transitionDelay: props.isMainNav && !navItemsAnimationDone && screenContext.desktop ? `${props.index * 100}ms` : '',
 			}}
 			{...props.attributes}
 		>
@@ -78,7 +87,7 @@ function NavItem(props) {
 		<NavLink
 			onClick={navLinkClickHandler}
 			to={props.url}
-			className={(navData) => {
+			className={navData => {
 				if (navData.isActive) {
 					classes.push(styles['nav__a--current']);
 				}

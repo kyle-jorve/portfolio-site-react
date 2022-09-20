@@ -1,4 +1,13 @@
-function useThumbnailConfig(props) {
+type ThumbnailConfigProps = {
+	isNew?: boolean;
+	isFeatured?: boolean;
+	isDetail?: boolean;
+	thumbnailKey: {
+		path: string;
+	};
+};
+
+function useThumbnailConfig(props: ThumbnailConfigProps) {
 	return props.isNew
 		? {
 				sources: [

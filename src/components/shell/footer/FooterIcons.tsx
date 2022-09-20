@@ -3,8 +3,13 @@ import SocialIcon from '../icons/SocialIcon';
 import ScreenContext from '../../../context/screen';
 import styles from './Footer.module.css';
 import socialStyles from '../icons/Social.module.css';
+import { SocialIconsType } from '../../../hooks/data/global-data';
 
-function FooterIcons(props) {
+type FooterIconsProps = {
+	socialIcons: SocialIconsType;
+};
+
+function FooterIcons(props: FooterIconsProps) {
 	const screenContext = useContext(ScreenContext);
 	const iconsLength = props.socialIcons.standard.length + props.socialIcons.commerce.length;
 	let ratio = [1, 1];
@@ -22,9 +27,7 @@ function FooterIcons(props) {
 				gridTemplate: `auto / minmax(0, ${ratio[0]}fr) minmax(0, ${ratio[1]}fr)`,
 			}}
 		>
-			<div
-				className={`${socialStyles.social} ${styles['footer__social']} ${styles['footer__social--standard']}`}
-			>
+			<div className={`${socialStyles.social} ${styles['footer__social']} ${styles['footer__social--standard']}`}>
 				{props.socialIcons.standard.map((item, index) => {
 					return (
 						<SocialIcon
@@ -32,7 +35,7 @@ function FooterIcons(props) {
 							name={item.name}
 							url={item.url}
 							attributes={{
-								tabIndex: screenContext.navOpen ? -1 : null,
+								tabIndex: screenContext.navOpen ? -1 : undefined,
 							}}
 						>
 							{!!item.icon && item.icon}
@@ -41,9 +44,7 @@ function FooterIcons(props) {
 				})}
 			</div>
 
-			<div
-				className={`${socialStyles.social} ${styles['footer__social']} ${styles['footer__social--commerce']}`}
-			>
+			<div className={`${socialStyles.social} ${styles['footer__social']} ${styles['footer__social--commerce']}`}>
 				{props.socialIcons.commerce.map((item, index) => {
 					return (
 						<SocialIcon
@@ -51,7 +52,7 @@ function FooterIcons(props) {
 							name={item.name}
 							url={item.url}
 							attributes={{
-								tabIndex: screenContext.navOpen ? -1 : null,
+								tabIndex: screenContext.navOpen ? -1 : undefined,
 							}}
 						>
 							{!!item.icon && item.icon}

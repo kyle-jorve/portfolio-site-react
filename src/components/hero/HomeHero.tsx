@@ -3,7 +3,11 @@ import ScreenContext from '../../context/screen';
 import styles from './Hero.module.css';
 import logo from '../../assets/icons-logos/logo-circle.svg';
 
-function HomeHero(props) {
+type HomeHeroProps = {
+	imageKey: string;
+};
+
+function HomeHero(props: HomeHeroProps) {
 	const screenContext = useContext(ScreenContext);
 	const bgConfig = {
 		sources: [
@@ -29,7 +33,7 @@ function HomeHero(props) {
 		styles.hero,
 		screenContext.loadStatus === 'done' && styles['hero--animate'],
 		screenContext.visited && styles['hero--static'],
-	].filter((c) => c);
+	].filter(c => c);
 
 	function scrollIconClickHandler() {
 		const featuredWorkSection = document.querySelector('#featured-work');
@@ -43,14 +47,7 @@ function HomeHero(props) {
 
 	return (
 		<section className={classes.join(' ')}>
-			<img
-				className={styles['hero__logo']}
-				src={logo}
-				alt=""
-				loading="eager"
-				fetchpriority="high"
-				aria-hidden="true"
-			/>
+			<img className={styles['hero__logo']} src={logo} alt="" loading="eager" aria-hidden="true" />
 
 			<h1 className={styles['hero__title']}>
 				<span className={styles['hero__title-1']}>Kyle Jorve</span>
@@ -61,7 +58,7 @@ function HomeHero(props) {
 				className={styles['scroll']}
 				aria-label="scroll to Featured Work"
 				onClick={scrollIconClickHandler}
-				tabIndex={screenContext.navOpen ? -1 : null}
+				tabIndex={screenContext.navOpen ? -1 : undefined}
 			>
 				<span className={styles['scroll__track']}>
 					<span className={styles['scroll__ball']}></span>
@@ -72,34 +69,16 @@ function HomeHero(props) {
 				<div className={styles['hero__img-frame']}>
 					<picture>
 						{bgConfig.sources.map((src, index) => {
-							return (
-								<source
-									key={index}
-									srcSet={src.srcset}
-									media={`(min-width: ${src.minScreenWidth}px)`}
-								/>
-							);
+							return <source key={index} srcSet={src.srcset} media={`(min-width: ${src.minScreenWidth}px)`} />;
 						})}
 
-						<img
-							className={styles['hero__bg-img']}
-							src={bgConfig.mobile.src}
-							alt=""
-							loading="eager"
-							fetchpriority="high"
-						/>
+						<img className={styles['hero__bg-img']} src={bgConfig.mobile.src} alt="" loading="eager" />
 					</picture>
 				</div>
 
 				<picture>
 					{bgConfig.sources.map((src, index) => {
-						return (
-							<source
-								key={index}
-								srcSet={src.srcset}
-								media={`(min-width: ${src.minScreenWidth}px)`}
-							/>
-						);
+						return <source key={index} srcSet={src.srcset} media={`(min-width: ${src.minScreenWidth}px)`} />;
 					})}
 
 					<img
@@ -107,7 +86,6 @@ function HomeHero(props) {
 						src={bgConfig.mobile.src}
 						alt=""
 						loading="eager"
-						fetchpriority="high"
 					/>
 				</picture>
 			</div>

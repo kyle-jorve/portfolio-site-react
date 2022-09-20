@@ -1,7 +1,12 @@
 import Neighbors from './Neighbors';
+import { GalleryItemType } from '../../hooks/data/gallery-data';
 import styles from './Showcase.module.css';
 
-function ContentShowcase(props) {
+type ContentShowcaseProps = {
+	item: GalleryItemType;
+} & React.PropsWithChildren;
+
+function ContentShowcase(props: ContentShowcaseProps) {
 	return (
 		<div className={styles['showcase__content-cont']}>
 			<div className={`${styles['showcase__content']} wrapper wrapper--content`}>

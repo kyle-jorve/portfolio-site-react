@@ -1,3 +1,15 @@
+export type HomeBioType = {
+	img: {
+		sources: {
+			url: string;
+			minScreenWidth: number;
+		}[];
+		mobileSource: string;
+		square: string;
+		alt: string;
+	};
+};
+
 export const homeData = {
 	get intro() {
 		return {
@@ -9,7 +21,7 @@ export const homeData = {
 			itemsLimit: 4,
 		};
 	},
-	get bio() {
+	get bio(): HomeBioType {
 		return {
 			img: {
 				sources: [

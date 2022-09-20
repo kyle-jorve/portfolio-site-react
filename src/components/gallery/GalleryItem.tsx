@@ -3,12 +3,29 @@ import ScreenContext from '../../context/screen';
 import CustomLink from '../shell/navigation/CustomLink';
 import useThumbnailConfig from '../../hooks/thumbnail-config';
 import styles from './Gallery.module.css';
+import { GalleryItemType } from '../../hooks/data/gallery-data';
 
-function GalleryItem(props) {
+type GalleryItemProps = GalleryItemType & {
+	className: string;
+	fromPage: string | null;
+	fromSection: string | null;
+	isNew: boolean;
+	attributes: {
+		tabIndex: number | undefined;
+	};
+	style: {
+		[prop: string]: string;
+	};
+};
+
+function GalleryItem(props: GalleryItemProps) {
 	const screenContext = useContext(ScreenContext);
-	const mediaConfig = useThumbnailConfig(props);
+	const mediaConfig = useThumbnailConfig({
+		isNew: props.isNew,
+		thumbnailKey: props.thumbnailKey,
+	});
 	const mobileImgSrc = require(`../../assets/gallery/${mediaConfig.mobile.url}`);
-	const classes = [styles['gallery__item'], props.className].filter((c) => c);
+	const classes = [styles['gallery__item'], props.className].filter(c => c);
 
 	function galleryItemClickHandler() {
 		screenContext.setLoadStatus('in');
@@ -42,13 +59,7 @@ function GalleryItem(props) {
 					{mediaConfig.sources.map((src, index) => {
 						const imgSrc = require(`../../assets/gallery/${src.url}`);
 
-						return (
-							<source
-								key={index}
-								srcSet={imgSrc}
-								media={`(min-width: ${src.minScreenWidth}px)`}
-							/>
-						);
+						return <source key={index} srcSet={imgSrc} media={`(min-width: ${src.minScreenWidth}px)`} />;
 					})}
 
 					<img
@@ -59,8 +70,7 @@ function GalleryItem(props) {
 						src={mobileImgSrc}
 						alt={props.thumbnailKey.alt}
 						loading="lazy"
-						fetchpriority="low"
-						onLoad={(event) => event.currentTarget.classList.add('loaded')}
+						onLoad={event => event.currentTarget.classList.add('loaded')}
 					/>
 				</picture>
 

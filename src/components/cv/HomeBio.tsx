@@ -2,12 +2,19 @@ import { useContext } from 'react';
 import CustomLink from '../shell/navigation/CustomLink';
 import ScreenContext from '../../context/screen';
 import styles from './CV.module.css';
+import { HomeBioType } from '../../hooks/data/home-data';
 
-function HomeBio(props) {
+type HomeBioProps = {
+	url: string;
+	title: string;
+	content: JSX.Element;
+} & HomeBioType;
+
+function HomeBio(props: HomeBioProps) {
 	const screenContext = useContext(ScreenContext);
 	const squareImg = require(`../../assets/${props.img.square}`);
 	const imgConfig = {
-		sources: props.img.sources.map((src) => {
+		sources: props.img.sources.map(src => {
 			return {
 				srcset: require(`../../assets/${src.url}`),
 				minScreenWidth: src.minScreenWidth,
@@ -23,19 +30,11 @@ function HomeBio(props) {
 			<div className="wrapper wrapper--wide">
 				<article className={styles['bio-home__content']}>
 					<div className={styles['bio__img-cont']} aria-hidden="true">
-						<img
-							className={styles['bio__img']}
-							src={squareImg}
-							alt=""
-							loading="lazy"
-							fetchpriority="low"
-						/>
+						<img className={styles['bio__img']} src={squareImg} alt="" loading="lazy" />
 					</div>
 
 					<div className={styles['bio-home__box']}>
-						<h2 className={`underline underline--center ${styles['bio-home__title']}`}>
-							{props.title}
-						</h2>
+						<h2 className={`underline underline--center ${styles['bio-home__title']}`}>{props.title}</h2>
 
 						{props.content}
 
@@ -45,7 +44,7 @@ function HomeBio(props) {
 								to={props.url}
 								onClick={() => screenContext.setToSection('resume')}
 								attributes={{
-									tabIndex: screenContext.navOpen ? -1 : null,
+									tabIndex: screenContext.navOpen ? -1 : undefined,
 								}}
 							>
 								See R&eacute;sum&eacute;
@@ -56,22 +55,10 @@ function HomeBio(props) {
 					<div className={styles['bio-home__img-cont']}>
 						<picture>
 							{imgConfig.sources.map((src, index) => {
-								return (
-									<source
-										key={index}
-										srcSet={src.srcset}
-										media={`(min-width: ${src.minScreenWidth}px)`}
-									/>
-								);
+								return <source key={index} srcSet={src.srcset} media={`(min-width: ${src.minScreenWidth}px)`} />;
 							})}
 
-							<img
-								className={styles['bio-home__img']}
-								src={imgConfig.mobile.src}
-								alt={props.img.alt}
-								loading="lazy"
-								fetchpriority="low"
-							/>
+							<img className={styles['bio-home__img']} src={imgConfig.mobile.src} alt={props.img.alt} loading="lazy" />
 						</picture>
 					</div>
 				</article>

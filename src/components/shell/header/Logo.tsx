@@ -8,7 +8,7 @@ function Logo() {
 	const navigate = useNavigate();
 	const screenContext = useContext(ScreenContext);
 
-	function logoClickHandler(event) {
+	function logoClickHandler(event: React.MouseEvent) {
 		if (screenContext.desktop) {
 			event.preventDefault();
 
@@ -31,19 +31,8 @@ function Logo() {
 	}
 
 	return (
-		<Link
-			className={styles['header__logo-cont']}
-			to="/"
-			onClick={logoClickHandler}
-			aria-label="go to home page"
-		>
-			<img
-				className={styles['header__logo']}
-				src={logo}
-				alt="The Art of Kyle Jorve logo"
-				loading="eager"
-				fetchpriority="high"
-			/>
+		<Link className={styles['header__logo-cont']} to="/" onClick={logoClickHandler} aria-label="go to home page">
+			<img className={styles['header__logo']} src={logo} alt="The Art of Kyle Jorve logo" loading="eager" />
 		</Link>
 	);
 }

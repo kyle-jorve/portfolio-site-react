@@ -1,5 +1,16 @@
 import GumroadIcon from '../../components/svgs/Gumroad';
 
+export type SocialIconType = {
+	name: string;
+	url: string;
+	icon?: JSX.Element;
+};
+
+export type SocialIconsType = {
+	standard: SocialIconType[];
+	commerce: SocialIconType[];
+};
+
 function useGlobalData() {
 	return {
 		get email() {
@@ -40,7 +51,7 @@ function useGlobalData() {
 				},
 			];
 		},
-		get socialIcons() {
+		get socialIcons(): SocialIconsType {
 			return {
 				standard: [
 					{

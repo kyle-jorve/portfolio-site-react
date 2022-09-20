@@ -4,29 +4,32 @@ import ScreenContext from '../../context/screen';
 import CustomLink from '../shell/navigation/CustomLink';
 import useGlobalData from '../../hooks/data/global-data';
 import GalleryItem from './GalleryItem';
+import { GalleryItemType } from '../../hooks/data/gallery-data';
 import styles from './Gallery.module.css';
+
+type FeaturedWorkProps = {
+	featuredItems: GalleryItemType[];
+};
 
 const ioOptions = {
 	threshold: 0.25,
 };
-let io;
+let io: IntersectionObserver;
 
-function FeaturedWork(props) {
+function FeaturedWork(props: FeaturedWorkProps) {
 	const screenContext = useContext(ScreenContext);
-	const sectionRef = useRef();
+	const sectionRef = useRef<HTMLElement>(null!);
 	const globalData = useGlobalData();
 	const location = useLocation();
 	const [intersected, setIntersected] = useState(false);
 	const [animationDone, setAnimationDone] = useState(false);
-	const page = globalData.nav.find((p) => p.url === location.pathname);
+	const page = globalData.nav.find(p => p.url === location.pathname);
 	const id = 'featured-work';
-	const totalDelay =
-		(props.featuredItems.length - 1) * screenContext.transitionDelay +
-		screenContext.transitionDuration;
+	const totalDelay = (props.featuredItems.length - 1) * screenContext.transitionDelay + screenContext.transitionDuration;
 
 	const ioHandler = useCallback(
-		(entries, observer) => {
-			entries.forEach((ent) => {
+		(entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+			entries.forEach(ent => {
 				if (!ent.isIntersecting) return;
 
 				setIntersected(true);
@@ -65,18 +68,15 @@ function FeaturedWork(props) {
 								name={item.name}
 								title={item.title}
 								thumbnailKey={item.thumbnailKey}
-								isFeatured={true}
 								orientation={item.orientation}
 								fromPage={page ? page.pageID : null}
 								fromSection={id}
 								className={!intersected ? styles['gallery__item--animated'] : ''}
 								style={{
-									transitionDelay: !animationDone
-										? `${index * screenContext.transitionDelay}ms`
-										: '',
+									transitionDelay: !animationDone ? `${index * screenContext.transitionDelay}ms` : '',
 								}}
 								attributes={{
-									tabIndex: screenContext.navOpen ? -1 : null,
+									tabIndex: screenContext.navOpen ? -1 : undefined,
 								}}
 							/>
 						);
@@ -88,7 +88,7 @@ function FeaturedWork(props) {
 						className="button button--primary"
 						to="/gallery"
 						attributes={{
-							tabIndex: screenContext.navOpen ? -1 : null,
+							tabIndex: screenContext.navOpen ? -1 : undefined,
 						}}
 					>
 						View Gallery

@@ -1,15 +1,13 @@
 import { useContext } from 'react';
 import ScreenContext from '../context/screen';
-import CustomLink from '../components/shell/navigation';
+import CustomLink from '../components/shell/navigation/CustomLink';
 import styles from '../components/hero/Hero.module.css';
 
 function NotFound() {
 	const screenContext = useContext(ScreenContext);
 
 	return (
-		<section
-			className={`section ${styles.hero} ${styles['hero--short']} ${styles['hero--content']}`}
-		>
+		<section className={`section ${styles.hero} ${styles['hero--short']} ${styles['hero--content']}`}>
 			<div className="wrapper wrapper--content">
 				<h1 className="underline underline--center">Page Not Found</h1>
 
@@ -18,7 +16,7 @@ function NotFound() {
 					<CustomLink
 						to="/"
 						attributes={{
-							tabIndex: screenContext.navOpen ? -1 : null,
+							tabIndex: screenContext.navOpen ? -1 : undefined,
 						}}
 					>
 						here

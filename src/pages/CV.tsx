@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useContext } from 'react';
 import ScreenContext from '../context/screen';
 import useCVData from '../hooks/data/cv-data';
-import Bio from '../components/cv';
-import Resume from '../components/cv';
+import Bio from '../components/cv/Bio';
+import Resume from '../components/cv/Resume';
 
 function CV() {
 	const screenContext = useContext(ScreenContext);

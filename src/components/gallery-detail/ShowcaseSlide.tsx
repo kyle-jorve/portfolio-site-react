@@ -1,7 +1,15 @@
 import ShowcasePicture from './ShowcasePicture';
 import styles from './Showcase.module.css';
+import { DetailKeyType } from '../../hooks/data/gallery-data';
 
-function ShowcaseSlide(props) {
+type ShowcaseSlideProps = {
+	index: number;
+	activeIndex: number;
+	zIndex: number | undefined;
+	item: DetailKeyType;
+};
+
+function ShowcaseSlide(props: ShowcaseSlideProps) {
 	const slideClasses = [
 		styles['showcase__slide'],
 		props.index === props.activeIndex
@@ -10,7 +18,7 @@ function ShowcaseSlide(props) {
 			? styles['showcase__slide--prev']
 			: '',
 		!!props.item.source && styles['showcase__slide--video'],
-	].filter((c) => c);
+	].filter(c => c);
 
 	return (
 		<div
@@ -21,11 +29,7 @@ function ShowcaseSlide(props) {
 			data-index={props.index}
 		>
 			<div className={styles['showcase__img-cont']}>
-				{!!props.item.source ? (
-					props.item.source
-				) : (
-					<ShowcasePicture path={props.item.path} alt={props.item.alt} />
-				)}
+				{!!props.item.source ? props.item.source : <ShowcasePicture path={props.item.path!} alt={props.item.alt!} />}
 			</div>
 		</div>
 	);

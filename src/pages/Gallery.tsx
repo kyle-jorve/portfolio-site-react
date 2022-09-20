@@ -4,7 +4,7 @@ import useGlobalData from '../hooks/data/global-data';
 import useGalleryData from '../hooks/data/gallery-data';
 import ScreenContext from '../context/screen';
 import styles from '../components/gallery/Gallery.module.css';
-import GalleryItem from '../components/gallery';
+import GalleryItem from '../components/gallery/GalleryItem';
 
 function Gallery() {
 	const screenContext = useContext(ScreenContext);
@@ -13,10 +13,8 @@ function Gallery() {
 	const globalData = useGlobalData();
 	const galleryData = useGalleryData();
 	const location = useLocation();
-	const page = globalData.nav.find((p) => p.url === location.pathname);
-	const totalDelay =
-		(galleryData.items.length - 1) * screenContext.transitionDelay +
-		screenContext.transitionDuration;
+	const page = globalData.nav.find(p => p.url === location.pathname);
+	const totalDelay = (galleryData.items.length - 1) * screenContext.transitionDelay + screenContext.transitionDuration;
 
 	const transitionItems = useCallback(() => {
 		setReveal(true);
@@ -49,13 +47,11 @@ function Gallery() {
 							fromPage={page ? page.pageID : null}
 							fromSection={null}
 							style={{
-								transitionDelay: !animationDone
-									? `${index * screenContext.transitionDelay}ms`
-									: '',
+								transitionDelay: !animationDone ? `${index * screenContext.transitionDelay}ms` : '',
 							}}
 							className={!reveal ? styles['gallery__item--animated'] : ''}
 							attributes={{
-								tabIndex: screenContext.navOpen ? -1 : null,
+								tabIndex: screenContext.navOpen ? -1 : undefined,
 							}}
 						/>
 					);

@@ -1,4 +1,6 @@
-function useDetailImageConfig(srcPath) {
+function useDetailImageConfig(srcPath: string | boolean) {
+	if (!srcPath) return;
+
 	return {
 		sources: [
 			{

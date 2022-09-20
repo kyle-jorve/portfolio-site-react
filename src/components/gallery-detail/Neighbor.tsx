@@ -3,8 +3,14 @@ import DetailPageContext from '../../context/detail-page';
 import CustomLink from '../shell/navigation/CustomLink';
 import useThumbnailConfig from '../../hooks/thumbnail-config';
 import styles from './Showcase.module.css';
+import { GalleryItemType } from '../../hooks/data/gallery-data';
 
-function truncateTitle(title) {
+type NeighborProps = {
+	item: GalleryItemType;
+	direction: string;
+};
+
+function truncateTitle(title: string) {
 	const titleArr = title.split(' ');
 	const maxLength = 22;
 	let truncTitle = '';
@@ -29,36 +35,24 @@ function truncateTitle(title) {
 	return truncTitle;
 }
 
-function Neighbor(props) {
+function Neighbor(props: NeighborProps) {
 	const context = useContext(DetailPageContext);
 	const thumb = useThumbnailConfig({
 		isDetail: true,
 		thumbnailKey: props.item.thumbnailKey,
 	});
 	const mobileImg = require(`../../assets/gallery/${thumb.mobile.url}`);
-	const neighborClasses = [styles['neighbor'], styles[`neighbor--${props.direction}`]].filter(
-		(c) => c
-	);
+	const neighborClasses = [styles['neighbor'], styles[`neighbor--${props.direction}`]].filter(c => c);
 
 	return (
 		<article className={neighborClasses.join(' ')}>
-			<CustomLink
-				className={styles['neighbor__link']}
-				to={`/gallery/${props.item.name}`}
-				onClick={context.resetSlideIndex}
-			>
+			<CustomLink className={styles['neighbor__link']} to={`/gallery/${props.item.name}`} onClick={context.resetSlideIndex}>
 				<div className={styles['neighbor__img-cont']}>
 					<picture>
 						{thumb.sources.map((s, index) => {
 							const srcset = require(`../../assets/gallery/${s.url}`);
 
-							return (
-								<source
-									key={index}
-									srcSet={srcset}
-									media={`(min-width: ${s.minScreenWidth}px)`}
-								/>
-							);
+							return <source key={index} srcSet={srcset} media={`(min-width: ${s.minScreenWidth}px)`} />;
 						})}
 
 						<img
@@ -69,25 +63,20 @@ function Neighbor(props) {
 								objectPosition: `center ${props.item.orientation}`,
 							}}
 							loading="lazy"
-							fetchpriority="low"
 						/>
 					</picture>
 				</div>
 
 				<div className={styles['neighbor__inner']}>
 					<button
-						className={`${styles['neighbor__arrow']} ${
-							styles[`neighbor__arrow--${props.direction}`]
-						}`}
+						className={`${styles['neighbor__arrow']} ${styles[`neighbor__arrow--${props.direction}`]}`}
 						aria-hidden="true"
 					></button>
 
 					<div className={styles['neighbor__content']}>
 						<h2 className={styles['neighbor__title']}>{props.direction}</h2>
 
-						<h3 className={styles['neighbor__subtitle']}>
-							{truncateTitle(props.item.title)}
-						</h3>
+						<h3 className={styles['neighbor__subtitle']}>{truncateTitle(props.item.title)}</h3>
 					</div>
 				</div>
 			</CustomLink>

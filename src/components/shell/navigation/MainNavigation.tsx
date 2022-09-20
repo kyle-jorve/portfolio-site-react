@@ -10,7 +10,10 @@ import styles from './Nav.module.css';
 import socialStyles from '../icons/Social.module.css';
 import galleryStyles from '../../gallery/Gallery.module.css';
 
-let timeout = {
+let timeout: {
+	social: ReturnType<typeof setTimeout> | null;
+	gallery: ReturnType<typeof setTimeout> | null;
+} = {
 	social: null,
 	gallery: null,
 };
@@ -23,23 +26,20 @@ function MainNavigation() {
 	const navItems = globalData.nav;
 	const recentWork = galleryData.items.slice(0, globalData.recentWorkLimit);
 	const location = useLocation();
-	const page = globalData.nav.find((p) => p.url === location.pathname);
+	const page = globalData.nav.find(p => p.url === location.pathname);
 	const screenContext = useContext(ScreenContext);
 	const totalDelay = {
 		icons:
-			([...globalData.socialIcons.standard, ...globalData.socialIcons.commerce].length - 1) *
-				screenContext.transitionDelay +
+			([...globalData.socialIcons.standard, ...globalData.socialIcons.commerce].length - 1) * screenContext.transitionDelay +
 			screenContext.transitionDuration,
-		gallery:
-			recentWork.length * screenContext.transtionDelay + screenContext.transitionDuration,
-		navItems:
-			navItems.length * screenContext.transitionDelay + screenContext.transitionDuration,
+		gallery: recentWork.length * screenContext.transtionDelay + screenContext.transitionDuration,
+		navItems: navItems.length * screenContext.transitionDelay + screenContext.transitionDuration,
 	};
 	const classes = [
 		styles.nav,
 		screenContext.navOpen && styles['nav--active'],
 		screenContext.navRevealed && styles['nav--revealed'],
-	].filter((c) => c);
+	].filter(c => c);
 
 	useEffect(() => {
 		if (screenContext.navOpen) {
@@ -62,11 +62,7 @@ function MainNavigation() {
 	}, [screenContext.navOpen, totalDelay.icons, totalDelay.gallery]);
 
 	return (
-		<nav
-			className={classes.join(' ')}
-			aria-hidden={!screenContext.navOpen}
-			id="main-navigation"
-		>
+		<nav className={classes.join(' ')} aria-hidden={!screenContext.navOpen} id="main-navigation">
 			<section className={styles['nav__inner']}>
 				{navItems.map((item, index) => {
 					return (
@@ -78,7 +74,7 @@ function MainNavigation() {
 							url={item.url}
 							onClick={screenContext.closeNav}
 							attributes={{
-								tabIndex: screenContext.navOpen ? null : -1,
+								tabIndex: screenContext.navOpen ? undefined : -1,
 							}}
 						>
 							{item.pageName}
@@ -88,9 +84,7 @@ function MainNavigation() {
 			</section>
 
 			<section className={`${socialStyles.social} ${socialStyles['social--header']}`}>
-				<div
-					className={`${socialStyles['social__row']} ${socialStyles['social__row--standard']}`}
-				>
+				<div className={`${socialStyles['social__row']} ${socialStyles['social__row--standard']}`}>
 					{globalData.socialIcons.standard.map((item, index) => {
 						return (
 							<SocialIcon
@@ -99,12 +93,10 @@ function MainNavigation() {
 								name={item.name}
 								url={item.url}
 								style={{
-									transitionDelay: !socialIconsAnimationDone
-										? `${index * screenContext.transitionDelay}ms`
-										: '',
+									transitionDelay: !socialIconsAnimationDone ? `${index * screenContext.transitionDelay}ms` : '',
 								}}
 								attributes={{
-									tabIndex: screenContext.navOpen ? null : -1,
+									tabIndex: screenContext.navOpen ? undefined : -1,
 								}}
 							>
 								{!!item.icon && item.icon}
@@ -122,12 +114,10 @@ function MainNavigation() {
 								name={item.name}
 								url={item.url}
 								style={{
-									transitionDelay: !socialIconsAnimationDone
-										? `${index * screenContext.transitionDelay}ms`
-										: '',
+									transitionDelay: !socialIconsAnimationDone ? `${index * screenContext.transitionDelay}ms` : '',
 								}}
 								attributes={{
-									tabIndex: screenContext.navOpen ? null : -1,
+									tabIndex: screenContext.navOpen ? undefined : -1,
 								}}
 							>
 								{!!item.icon && item.icon}
@@ -141,33 +131,24 @@ function MainNavigation() {
 				<div className="wrapper wrapper--section">
 					<h2 className="flex-line">Recent Work</h2>
 
-					<div
-						className={`${galleryStyles['gallery__grid']} ${galleryStyles['gallery__grid--nav']}`}
-					>
+					<div className={`${galleryStyles['gallery__grid']} ${galleryStyles['gallery__grid--nav']}`}>
 						{recentWork.map((item, index) => {
 							return (
 								<GalleryItem
 									key={index}
-									className={
-										!screenContext.navRevealed
-											? galleryStyles['gallery__item--animated']
-											: ''
-									}
+									className={!screenContext.navRevealed ? galleryStyles['gallery__item--animated'] : ''}
 									isNew={index === 0}
 									name={item.name}
 									title={item.title}
 									thumbnailKey={item.thumbnailKey}
 									orientation={item.orientation}
-									isInNav={true}
 									fromPage={page ? page.pageID : null}
 									fromSection={null}
 									style={{
-										transitionDelay: !galleryAnimationDone
-											? `${index * screenContext.transitionDelay}ms`
-											: '',
+										transitionDelay: !galleryAnimationDone ? `${index * screenContext.transitionDelay}ms` : '',
 									}}
 									attributes={{
-										tabIndex: screenContext.navOpen ? null : -1,
+										tabIndex: screenContext.navOpen ? undefined : -1,
 									}}
 								/>
 							);
