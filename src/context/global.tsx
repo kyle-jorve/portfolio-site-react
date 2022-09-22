@@ -7,8 +7,8 @@ type SiteContextType = {
 };
 
 const longTransitionDuration = 600; // milliseconds
-	const transitionDuration = 300; // milliseconds
-	const transitionDelay = 100;
+const transitionDuration = 300; // milliseconds
+const transitionDelay = 100;
 const resizeEvents = ['resize', 'orientationchange'];
 const breakpoints = [640, 1024];
 const SiteContext = React.createContext<SiteContextType>({
@@ -28,7 +28,7 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 	const globalData = useGlobalData();
 	const navigate = useNavigate();
 	const pages = globalData.nav;
-	const isDetailPage = useMatch('/gallery/:itemID');
+	const detailPageMatch = !!useMatch('/gallery/:itemID');
 
 	//----- global site context -----//
 	const [visited, setVisited] = useState(false);
@@ -40,6 +40,7 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 	const [fromSection, setFromSection] = useState(null);
 	const [toSection, setToSection] = useState(null);
 	const [loadStatus, setLoadStatus] = useState('idle');
+	const [pageNotFound, setPageNotFound] = useState(false);
 
 	//----- gallery detail page context -----//
 	const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -68,33 +69,33 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 		}
 	}, []);
 
-	const toggleLoader = useCallback((on: boolean = true, destinationIsDetailPage: boolean = false) => {
+	const toggleLoader = useCallback((on: boolean = true, destinationIsDetailPage: boolean = false, isDetailPage: boolean = detailPageMatch) => {
 		if (on) {
 			setLoadStatus('in');
 			return;
 		}
 
-		if ((isDetailPage || destinationIsDetailPage) && imagesLoaded) {
+		if ((isDetailPage || destinationIsDetailPage) && imagesLoaded && !pageNotFound) {
 			removeLoader();
 		}
-		else if (!isDetailPage && !destinationIsDetailPage) {
+		else if ((!isDetailPage && !destinationIsDetailPage) || pageNotFound) {
 			removeLoader();
 		}
-	}, [imagesLoaded, !!isDetailPage]);
+	}, [imagesLoaded, pageNotFound, detailPageMatch, removeLoader]);
 
 	useEffect(() => {
 		resizeHandler();
 
 		resizeEvents.forEach(ev => window.addEventListener(ev, resizeHandler));
 
-		if (isDetailPage && imagesLoaded) {
+		if ((detailPageMatch && imagesLoaded) || pageNotFound) {
 			removeLoader();
 		}
 
 		return () => {
 			resizeEvents.forEach(ev => window.removeEventListener(ev, resizeHandler));
 		};
-	}, [resizeHandler, removeLoader, isDetailPage, imagesLoaded]);
+	}, [resizeHandler, removeLoader, detailPageMatch, imagesLoaded, pageNotFound]);
 
 	function navToggleHandler() {
 		navButtonRef.current!.blur();
@@ -193,6 +194,7 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 				navButtonRef,
 				navOpen,
 				navRevealed,
+				pageNotFound,
 				toSection,
 				transitionDelay,
 				transitionDuration,
@@ -209,6 +211,7 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 				setFromPage,
 				setFromSection,
 				setImagesLoaded,
+				setPageNotFound,
 				setToSection,
 				setVisited,
 				toggleLoader,

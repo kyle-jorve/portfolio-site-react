@@ -33,6 +33,7 @@ function App() {
 		if (timeout) clearTimeout(timeout);
 
 		siteContext.toggleLoader(false);
+		siteContext.setPageNotFound(false);
 
 		if (isDetailPage) {
 			body.style.paddingBottom = '';

@@ -1,10 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import SiteContext from '../context/global';
 import CustomLink from '../components/shell/navigation/CustomLink';
 import styles from '../components/hero/Hero.module.css';
 
 function NotFound() {
 	const siteContext = useContext(SiteContext);
+
+	useEffect(() => {
+		siteContext.setPageNotFound(true);
+		
+		return () => {
+			siteContext.setPageNotFound(false);
+		}
+	});
 
 	return (
 		<section className={`section ${styles.hero} ${styles['hero--short']} ${styles['hero--content']}`}>
