@@ -32,13 +32,11 @@ function App() {
 	useEffect(() => {
 		if (timeout) clearTimeout(timeout);
 
-		siteContext.toggleLoader(false);
-		siteContext.setPageNotFound(false);
-
 		if (isDetailPage) {
 			body.style.paddingBottom = '';
-		}
-		else {
+		} else {
+			siteContext.toggleLoader(false);
+
 			timeout = setTimeout(() => {
 				if (siteContext.mobile) {
 					body.style.paddingBottom = `${navRef.current?.offsetHeight}px`;

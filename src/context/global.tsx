@@ -19,8 +19,8 @@ const SiteContext = React.createContext<SiteContextType>({
 	loadStatus: 'idle',
 	detailPage: {
 		activeSlideIndex: 0,
-		imagesLoaded: false
-	}
+		imagesLoaded: false,
+	},
 });
 
 export function SiteContextProvider(props: React.PropsWithChildren) {
@@ -45,7 +45,7 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 	//----- gallery detail page context -----//
 	const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 	const [imagesLoaded, setImagesLoaded] = useState(false);
-	
+
 	//----- global utilities -----//
 
 	const removeLoader = useCallback(() => {
@@ -69,19 +69,24 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 		}
 	}, []);
 
-	const toggleLoader = useCallback((on: boolean = true, destinationIsDetailPage: boolean = false, isDetailPage: boolean = detailPageMatch) => {
-		if (on) {
-			setLoadStatus('in');
-			return;
-		}
+	const toggleLoader = useCallback(
+		(on: boolean = true, destinationIsDetailPage: boolean = false, isDetailPage: boolean = detailPageMatch) => {
+			const mustRemoveLoader =
+				((isDetailPage || destinationIsDetailPage) && imagesLoaded && !pageNotFound) ||
+				(!isDetailPage && !destinationIsDetailPage) ||
+				pageNotFound;
 
-		if ((isDetailPage || destinationIsDetailPage) && imagesLoaded && !pageNotFound) {
-			removeLoader();
-		}
-		else if ((!isDetailPage && !destinationIsDetailPage) || pageNotFound) {
-			removeLoader();
-		}
-	}, [imagesLoaded, pageNotFound, detailPageMatch, removeLoader]);
+			if (on) {
+				setLoadStatus('in');
+				return;
+			}
+
+			if (mustRemoveLoader) {
+				removeLoader();
+			}
+		},
+		[imagesLoaded, pageNotFound, detailPageMatch, removeLoader]
+	);
 
 	useEffect(() => {
 		resizeHandler();
@@ -199,7 +204,7 @@ export function SiteContextProvider(props: React.PropsWithChildren) {
 				transitionDelay,
 				transitionDuration,
 				visited,
-				
+
 				closeNav,
 				goToNextSlide,
 				goToPrevSlide,
