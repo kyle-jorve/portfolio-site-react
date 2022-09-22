@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ScreenContext from '../../context/screen';
+import SiteContext from '../../context/global';
 import CustomLink from '../shell/navigation/CustomLink';
 import useThumbnailConfig from '../../hooks/thumbnail-config';
 import styles from './Gallery.module.css';
@@ -19,7 +19,7 @@ type GalleryItemProps = GalleryItemType & {
 };
 
 function GalleryItem(props: GalleryItemProps) {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const mediaConfig = useThumbnailConfig({
 		isNew: props.isNew,
 		thumbnailKey: props.thumbnailKey,
@@ -28,21 +28,21 @@ function GalleryItem(props: GalleryItemProps) {
 	const classes = [styles['gallery__item'], props.className].filter(c => c);
 
 	function galleryItemClickHandler() {
-		screenContext.setLoadStatus('in');
+		siteContext.toggleLoader();
 
 		setTimeout(() => {
-			screenContext.closeNav();
+			siteContext.closeNav();
 
 			if (props.fromPage) {
-				screenContext.setFromPage(props.fromPage);
+				siteContext.setFromPage(props.fromPage);
 			}
 
 			if (props.fromSection) {
-				screenContext.setFromSection(props.fromSection);
+				siteContext.setFromSection(props.fromSection);
 			} else {
-				screenContext.setFromSection(null);
+				siteContext.setFromSection(null);
 			}
-		}, screenContext.longTransitionDuration);
+		}, siteContext.longTransitionDuration);
 	}
 
 	return (

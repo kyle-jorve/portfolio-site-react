@@ -1,14 +1,24 @@
+import { useCallback } from 'react';
 import useDetailImageConfig from '../../hooks/detail-image-config';
 import styles from './Showcase.module.css';
 
 type ShowcasePictureProps = {
 	path?: string;
 	alt?: string;
+	onLoad?: Function;
 };
 
 function ShowcasePicture(props: ShowcasePictureProps) {
 	const config = useDetailImageConfig(props.path ? props.path : false);
 	const imgSrc = config ? require(`../../assets/gallery/${config.mobile.url}`) : undefined;
+
+	const handleImageLoad = useCallback((event: React.SyntheticEvent) => {
+		const target = event.currentTarget as HTMLImageElement;
+	
+		target?.classList.add('loaded');
+
+		if (props.onLoad) props.onLoad();
+	}, [props.onLoad]);
 
 	return (
 		<picture>
@@ -24,7 +34,7 @@ function ShowcasePicture(props: ShowcasePictureProps) {
 				src={imgSrc}
 				alt={props.alt}
 				loading="eager"
-				onLoad={event => event.currentTarget.classList.add('loaded')}
+				onLoad={handleImageLoad}
 			/>
 		</picture>
 	);

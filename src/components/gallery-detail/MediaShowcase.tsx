@@ -1,5 +1,5 @@
-import { Fragment, useContext } from 'react';
-import DetailPageContext from '../../context/detail-page';
+import { Fragment, useContext, useEffect } from 'react';
+import SiteContext from '../../context/global';
 import ShowcaseSlide from './ShowcaseSlide';
 import ShowcasePicture from './ShowcasePicture';
 import styles from './Showcase.module.css';
@@ -10,9 +10,27 @@ type MediaShowcaseProps = {
 };
 
 function MediaShowcase(props: MediaShowcaseProps) {
-	const context = useContext(DetailPageContext);
+	const context = useContext(SiteContext);
 	const item = props.item;
 	const slidesLength = item.detailKeys?.length;
+	const imagesLength = item.detailKeys?.filter(key => !key.source).length;
+	let imagesLoaded = 0;
+
+	useEffect(() => {
+		context.setImagesLoaded(false);
+
+		return () => {
+			context.setImagesLoaded(false);
+		}
+	});
+
+	function imageLoadHandler() {
+		imagesLoaded++;
+
+		if (imagesLoaded === imagesLength) {
+			context.setImagesLoaded(true);
+		}
+	};
 
 	function dotClickHandler(event: React.MouseEvent) {
 		const target = event.currentTarget as HTMLButtonElement;
@@ -45,6 +63,7 @@ function MediaShowcase(props: MediaShowcaseProps) {
 							activeIndex={context.activeSlideIndex}
 							zIndex={zIndex || undefined}
 							item={key}
+							onLoad={imageLoadHandler}
 						/>
 					);
 				})}

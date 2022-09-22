@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import useGlobalData from '../../../hooks/data/global-data';
 import useGalleryData from '../../../hooks/data/gallery-data';
 import NavItem from './NavItem';
@@ -27,22 +27,22 @@ function MainNavigation() {
 	const recentWork = galleryData.items.slice(0, globalData.recentWorkLimit);
 	const location = useLocation();
 	const page = globalData.nav.find(p => p.url === location.pathname);
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const totalDelay = {
 		icons:
-			([...globalData.socialIcons.standard, ...globalData.socialIcons.commerce].length - 1) * screenContext.transitionDelay +
-			screenContext.transitionDuration,
-		gallery: recentWork.length * screenContext.transtionDelay + screenContext.transitionDuration,
-		navItems: navItems.length * screenContext.transitionDelay + screenContext.transitionDuration,
+			([...globalData.socialIcons.standard, ...globalData.socialIcons.commerce].length - 1) * siteContext.transitionDelay +
+			siteContext.transitionDuration,
+		gallery: recentWork.length * siteContext.transtionDelay + siteContext.transitionDuration,
+		navItems: navItems.length * siteContext.transitionDelay + siteContext.transitionDuration,
 	};
 	const classes = [
 		styles.nav,
-		screenContext.navOpen && styles['nav--active'],
-		screenContext.navRevealed && styles['nav--revealed'],
+		siteContext.navOpen && styles['nav--active'],
+		siteContext.navRevealed && styles['nav--revealed'],
 	].filter(c => c);
 
 	useEffect(() => {
-		if (screenContext.navOpen) {
+		if (siteContext.navOpen) {
 			timeout.social = setTimeout(() => {
 				setSocialIconsAnimationDone(true);
 			}, totalDelay.icons);
@@ -59,10 +59,10 @@ function MainNavigation() {
 			if (timeout.social) clearTimeout(timeout.social);
 			if (timeout.gallery) clearTimeout(timeout.gallery);
 		};
-	}, [screenContext.navOpen, totalDelay.icons, totalDelay.gallery]);
+	}, [siteContext.navOpen, totalDelay.icons, totalDelay.gallery]);
 
 	return (
-		<nav className={classes.join(' ')} aria-hidden={!screenContext.navOpen} id="main-navigation">
+		<nav className={classes.join(' ')} aria-hidden={!siteContext.navOpen} id="main-navigation">
 			<section className={styles['nav__inner']}>
 				{navItems.map((item, index) => {
 					return (
@@ -72,9 +72,9 @@ function MainNavigation() {
 							key={index}
 							index={index}
 							url={item.url}
-							onClick={screenContext.closeNav}
+							onClick={siteContext.closeNav}
 							attributes={{
-								tabIndex: screenContext.navOpen ? undefined : -1,
+								tabIndex: siteContext.navOpen ? undefined : -1,
 							}}
 						>
 							{item.pageName}
@@ -93,10 +93,10 @@ function MainNavigation() {
 								name={item.name}
 								url={item.url}
 								style={{
-									transitionDelay: !socialIconsAnimationDone ? `${index * screenContext.transitionDelay}ms` : '',
+									transitionDelay: !socialIconsAnimationDone ? `${index * siteContext.transitionDelay}ms` : '',
 								}}
 								attributes={{
-									tabIndex: screenContext.navOpen ? undefined : -1,
+									tabIndex: siteContext.navOpen ? undefined : -1,
 								}}
 							>
 								{!!item.icon && item.icon}
@@ -114,10 +114,10 @@ function MainNavigation() {
 								name={item.name}
 								url={item.url}
 								style={{
-									transitionDelay: !socialIconsAnimationDone ? `${index * screenContext.transitionDelay}ms` : '',
+									transitionDelay: !socialIconsAnimationDone ? `${index * siteContext.transitionDelay}ms` : '',
 								}}
 								attributes={{
-									tabIndex: screenContext.navOpen ? undefined : -1,
+									tabIndex: siteContext.navOpen ? undefined : -1,
 								}}
 							>
 								{!!item.icon && item.icon}
@@ -136,7 +136,7 @@ function MainNavigation() {
 							return (
 								<GalleryItem
 									key={index}
-									className={!screenContext.navRevealed ? galleryStyles['gallery__item--animated'] : ''}
+									className={!siteContext.navRevealed ? galleryStyles['gallery__item--animated'] : ''}
 									isNew={index === 0}
 									name={item.name}
 									title={item.title}
@@ -145,10 +145,10 @@ function MainNavigation() {
 									fromPage={page ? page.pageID : null}
 									fromSection={null}
 									style={{
-										transitionDelay: !galleryAnimationDone ? `${index * screenContext.transitionDelay}ms` : '',
+										transitionDelay: !galleryAnimationDone ? `${index * siteContext.transitionDelay}ms` : '',
 									}}
 									attributes={{
-										tabIndex: screenContext.navOpen ? undefined : -1,
+										tabIndex: siteContext.navOpen ? undefined : -1,
 									}}
 								/>
 							);

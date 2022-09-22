@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ScreenContext from '../../context/screen';
+import SiteContext from '../../context/global';
 import styles from './Hero.module.css';
 import logo from '../../assets/icons-logos/logo-circle.svg';
 
@@ -8,7 +8,7 @@ type HomeHeroProps = {
 };
 
 function HomeHero(props: HomeHeroProps) {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const bgConfig = {
 		sources: [
 			{
@@ -31,8 +31,8 @@ function HomeHero(props: HomeHeroProps) {
 	const classes = [
 		'section',
 		styles.hero,
-		screenContext.loadStatus === 'done' && styles['hero--animate'],
-		screenContext.visited && styles['hero--static'],
+		siteContext.loadStatus === 'done' && styles['hero--animate'],
+		siteContext.visited && styles['hero--static'],
 	].filter(c => c);
 
 	function scrollIconClickHandler() {
@@ -58,7 +58,7 @@ function HomeHero(props: HomeHeroProps) {
 				className={styles['scroll']}
 				aria-label="scroll to Featured Work"
 				onClick={scrollIconClickHandler}
-				tabIndex={screenContext.navOpen ? -1 : undefined}
+				tabIndex={siteContext.navOpen ? -1 : undefined}
 			>
 				<span className={styles['scroll__track']}>
 					<span className={styles['scroll__ball']}></span>

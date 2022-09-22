@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import CustomLink from '../shell/navigation/CustomLink';
-import ScreenContext from '../../context/screen';
+import SiteContext from '../../context/global';
 import styles from './CV.module.css';
 import { HomeBioType } from '../../hooks/data/home-data';
 
@@ -11,7 +11,7 @@ type HomeBioProps = {
 } & HomeBioType;
 
 function HomeBio(props: HomeBioProps) {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const squareImg = require(`../../assets/${props.img.square}`);
 	const imgConfig = {
 		sources: props.img.sources.map(src => {
@@ -42,9 +42,9 @@ function HomeBio(props: HomeBioProps) {
 							<CustomLink
 								className="button button--primary"
 								to={props.url}
-								onClick={() => screenContext.setToSection('resume')}
+								onClick={() => siteContext.setToSection('resume')}
 								attributes={{
-									tabIndex: screenContext.navOpen ? -1 : undefined,
+									tabIndex: siteContext.navOpen ? -1 : undefined,
 								}}
 							>
 								See R&eacute;sum&eacute;

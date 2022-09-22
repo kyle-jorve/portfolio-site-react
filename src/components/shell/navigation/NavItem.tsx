@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import styles from './Nav.module.css';
 
 type NavItemProps = {
@@ -24,7 +24,7 @@ let timeout: ReturnType<typeof setTimeout>;
 function NavItem(props: NavItemProps) {
 	const navigate = useNavigate();
 	const [navItemsAnimationDone, setNavItemsAnimationDone] = useState(false);
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const onClick = props.onClick || (() => {});
 	const url = new URL(props.url.includes('http') ? props.url : `${window.location.protocol}//${window.location.host}${props.url}`);
 	const curHost = window.location.host;
@@ -33,7 +33,7 @@ function NavItem(props: NavItemProps) {
 	let classes = [!props.isMobile && styles['nav__a'], props.className].filter(c => c);
 
 	function navLinkClickHandler(event: React.MouseEvent) {
-		if (!screenContext.desktop) {
+		if (!siteContext.desktop) {
 			onClick(event);
 
 			return;
@@ -41,23 +41,19 @@ function NavItem(props: NavItemProps) {
 
 		event.preventDefault();
 
-		screenContext.setLoadStatus('in');
+		siteContext.toggleLoader();
 
 		setTimeout(() => {
 			navigate(props.url);
 
 			onClick(event);
 
-			screenContext.setLoadStatus('out');
-
-			setTimeout(() => {
-				screenContext.setLoadStatus('done');
-			}, screenContext.longTransitionDuration);
-		}, screenContext.longTransitionDuration);
+			siteContext.toggleLoader(false);
+		}, siteContext.longTransitionDuration);
 	}
 
 	useEffect(() => {
-		if (screenContext.navOpen) {
+		if (siteContext.navOpen) {
 			timeout = setTimeout(() => {
 				setNavItemsAnimationDone(true);
 			}, totalDelay);
@@ -68,7 +64,7 @@ function NavItem(props: NavItemProps) {
 		return () => {
 			if (timeout) clearTimeout(timeout);
 		};
-	}, [screenContext.navOpen, totalDelay]);
+	}, [siteContext.navOpen, totalDelay]);
 
 	return externalLink ? (
 		<a
@@ -77,7 +73,7 @@ function NavItem(props: NavItemProps) {
 			rel="noopener noreferrer"
 			className={classes.join(' ')}
 			style={{
-				transitionDelay: props.isMainNav && !navItemsAnimationDone && screenContext.desktop ? `${props.index * 100}ms` : '',
+				transitionDelay: props.isMainNav && !navItemsAnimationDone && siteContext.desktop ? `${props.index * 100}ms` : '',
 			}}
 			{...props.attributes}
 		>
@@ -96,8 +92,8 @@ function NavItem(props: NavItemProps) {
 			}}
 			style={{
 				transitionDelay:
-					props.isMainNav && !navItemsAnimationDone && screenContext.desktop
-						? `${props.index * screenContext.transitionDelay}ms`
+					props.isMainNav && !navItemsAnimationDone && siteContext.desktop
+						? `${props.index * siteContext.transitionDelay}ms`
 						: '',
 			}}
 			{...props.attributes}

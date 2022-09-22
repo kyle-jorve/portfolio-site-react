@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ScreenContext from '../../context/screen';
+import SiteContext from '../../context/global';
 import CVItem from './CVItem';
 import { ResumeType } from '../../hooks/data/cv-data';
 import styles from './CV.module.css';
@@ -9,7 +9,7 @@ type ResumeProps = {
 };
 
 function Resume(props: ResumeProps) {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const resume = require(`../../assets/${props.resume.docUrl}`);
 
 	return (
@@ -23,7 +23,7 @@ function Resume(props: ResumeProps) {
 							className="button button--primary button--download"
 							href={resume}
 							download
-							tabIndex={screenContext.navOpen ? -1 : undefined}
+							tabIndex={siteContext.navOpen ? -1 : undefined}
 						>
 							Download
 						</a>

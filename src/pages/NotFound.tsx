@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import ScreenContext from '../context/screen';
+import SiteContext from '../context/global';
 import CustomLink from '../components/shell/navigation/CustomLink';
 import styles from '../components/hero/Hero.module.css';
 
 function NotFound() {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 
 	return (
 		<section className={`section ${styles.hero} ${styles['hero--short']} ${styles['hero--content']}`}>
@@ -16,7 +16,7 @@ function NotFound() {
 					<CustomLink
 						to="/"
 						attributes={{
-							tabIndex: screenContext.navOpen ? -1 : undefined,
+							tabIndex: siteContext.navOpen ? -1 : undefined,
 						}}
 					>
 						here

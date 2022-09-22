@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import ScreenContext from '../../../context/screen';
+import { Link, useNavigate, matchPath } from 'react-router-dom';
+import SiteContext from '../../../context/global';
 
 type CustomLinkProps = {
 	onClick?: React.MouseEventHandler;
@@ -14,10 +14,12 @@ type CustomLinkProps = {
 function CustomLink(props: CustomLinkProps) {
 	const onClick = props.onClick || (() => {});
 	const navigate = useNavigate();
-	const screenContext = useContext(ScreenContext);
-
+	const siteContext = useContext(SiteContext);
+	
 	function linkClickHandler(event: React.MouseEvent) {
-		if (!screenContext.desktop) {
+		const isDetailRoute = matchPath('/gallery/:itemID', props.to);
+
+		if (!siteContext.desktop) {
 			onClick(event);
 
 			return;
@@ -27,17 +29,13 @@ function CustomLink(props: CustomLinkProps) {
 
 		onClick(event);
 
-		screenContext.setLoadStatus('in');
+		siteContext.toggleLoader();
 
 		setTimeout(() => {
 			navigate(props.to);
 
-			screenContext.setLoadStatus('out');
-
-			setTimeout(() => {
-				screenContext.setLoadStatus('done');
-			}, screenContext.longTransitionDuration);
-		}, screenContext.longTransitionDuration);
+			siteContext.toggleLoader(false, !!isDetailRoute);
+		}, siteContext.longTransitionDuration);
 	}
 
 	return (

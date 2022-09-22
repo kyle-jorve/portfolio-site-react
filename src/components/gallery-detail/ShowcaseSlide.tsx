@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import ShowcasePicture from './ShowcasePicture';
 import styles from './Showcase.module.css';
 import { DetailKeyType } from '../../hooks/data/gallery-data';
@@ -7,6 +8,7 @@ type ShowcaseSlideProps = {
 	activeIndex: number;
 	zIndex: number | undefined;
 	item: DetailKeyType;
+	onLoad?: Function;
 };
 
 function ShowcaseSlide(props: ShowcaseSlideProps) {
@@ -20,6 +22,10 @@ function ShowcaseSlide(props: ShowcaseSlideProps) {
 		!!props.item.source && styles['showcase__slide--video'],
 	].filter(c => c);
 
+	const imageLoadHandler = useCallback(() => {
+		if (props.onLoad) props.onLoad();
+	}, [props.onLoad]);
+
 	return (
 		<div
 			className={slideClasses.join(' ')}
@@ -29,7 +35,7 @@ function ShowcaseSlide(props: ShowcaseSlideProps) {
 			data-index={props.index}
 		>
 			<div className={styles['showcase__img-cont']}>
-				{!!props.item.source ? props.item.source : <ShowcasePicture path={props.item.path!} alt={props.item.alt!} />}
+				{!!props.item.source ? props.item.source : <ShowcasePicture path={props.item.path!} alt={props.item.alt!} onLoad={imageLoadHandler} />}
 			</div>
 		</div>
 	);

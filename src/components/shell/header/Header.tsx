@@ -1,17 +1,17 @@
 import { useContext } from 'react';
 import { useMatch } from 'react-router-dom';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import Logo from './Logo';
 import NavButton from '../navigation/NavButton';
 import styles from './Header.module.css';
 
 function Header() {
 	const isHomePage = useMatch('/');
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const classes = [
 		styles.header,
-		screenContext.loadStatus !== 'done' &&
-			!screenContext.visited &&
+		siteContext.loadStatus !== 'done' &&
+			!siteContext.visited &&
 			window.scrollY < 10 &&
 			styles['header--hidden'],
 		!!isHomePage && styles['header--home'],
@@ -21,7 +21,7 @@ function Header() {
 		<header className={classes.join(' ')}>
 			<Logo />
 
-			{!screenContext.mobile && <NavButton />}
+			{!siteContext.mobile && <NavButton />}
 		</header>
 	);
 }

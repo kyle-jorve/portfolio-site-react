@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import DetailPageContext from '../../context/detail-page';
+import SiteContext from '../../context/global';
 import CustomLink from '../shell/navigation/CustomLink';
 import useThumbnailConfig from '../../hooks/thumbnail-config';
 import styles from './Showcase.module.css';
@@ -36,7 +36,7 @@ function truncateTitle(title: string) {
 }
 
 function Neighbor(props: NeighborProps) {
-	const context = useContext(DetailPageContext);
+	const context = useContext(SiteContext);
 	const thumb = useThumbnailConfig({
 		isDetail: true,
 		thumbnailKey: props.item.thumbnailKey,

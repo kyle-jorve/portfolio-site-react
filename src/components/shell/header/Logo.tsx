@@ -1,32 +1,28 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import logo from '../../../assets/icons-logos/logo-circle.svg';
 import styles from './Header.module.css';
 
 function Logo() {
 	const navigate = useNavigate();
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 
 	function logoClickHandler(event: React.MouseEvent) {
-		if (screenContext.desktop) {
+		if (siteContext.desktop) {
 			event.preventDefault();
 
-			screenContext.setLoadStatus('in');
+			siteContext.toggleLoader();
 
 			setTimeout(() => {
 				navigate('/');
 
-				screenContext.closeNav();
+				siteContext.closeNav();
 
-				screenContext.setLoadStatus('out');
-
-				setTimeout(() => {
-					screenContext.setLoadStatus('done');
-				}, screenContext.longTransitionDuration);
-			}, screenContext.longTransitionDuration);
-		} else if (screenContext.navOpen) {
-			screenContext.closeNav();
+				siteContext.toggleLoader(false);
+			}, siteContext.longTransitionDuration);
+		} else if (siteContext.navOpen) {
+			siteContext.closeNav();
 		}
 	}
 

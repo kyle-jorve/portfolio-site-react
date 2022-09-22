@@ -1,22 +1,22 @@
 import { useContext } from 'react';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import styles from './Nav.module.css';
 
 function NavButton() {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const classes = [
 		styles['nav__button'],
-		screenContext.navOpen && styles['nav__button--active'],
+		siteContext.navOpen && styles['nav__button--active'],
 	].filter((c) => c);
 
 	return (
 		<button
-			ref={screenContext.navButtonRef}
-			onClick={screenContext.navToggleHandler}
+			ref={siteContext.navButtonRef}
+			onClick={siteContext.navToggleHandler}
 			className={classes.join(' ')}
 			aria-controls="main-navigation"
 			aria-label="toggle main navigation"
-			aria-expanded={screenContext.navOpen}
+			aria-expanded={siteContext.navOpen}
 		>
 			<div className={styles['nav__button-blocks']} aria-hidden="true">
 				<span className={styles['nav__button-block']}></span>

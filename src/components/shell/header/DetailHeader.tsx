@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import Logo from './Logo';
 import styles from './Header.module.css';
 
 function DetailHeader() {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 
 	return (
 		<header className={styles.header}>
@@ -12,8 +12,8 @@ function DetailHeader() {
 
 			<button
 				className="close-button"
-				aria-label={`return to ${screenContext.fromPage} page`}
-				onClick={screenContext.returnToOriginPage}
+				aria-label={`return to ${siteContext.fromPage} page`}
+				onClick={siteContext.returnToOriginPage}
 			></button>
 		</header>
 	);

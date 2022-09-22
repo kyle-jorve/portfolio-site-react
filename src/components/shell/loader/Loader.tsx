@@ -1,14 +1,14 @@
 import { useContext } from 'react';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import styles from './Loader.module.css';
 
 function Loader() {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const classes = [
 		styles.loader,
-		screenContext.loadStatus === 'in'
+		siteContext.loadStatus === 'in'
 			? styles['loader--slide-in']
-			: screenContext.loadStatus === 'out' || screenContext.loadStatus === 'done'
+			: siteContext.loadStatus === 'out' || siteContext.loadStatus === 'done'
 			? styles['loader--slide-out']
 			: '',
 	].filter((c) => c);
@@ -18,7 +18,7 @@ function Loader() {
 			className={classes.join(' ')}
 			aria-hidden="true"
 			style={{
-				animationDuration: `${screenContext.longTransitionDuration}ms`,
+				animationDuration: `${siteContext.longTransitionDuration}ms`,
 			}}
 		>
 			<span className={styles['loader__track']}>

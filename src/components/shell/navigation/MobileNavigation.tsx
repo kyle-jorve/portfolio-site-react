@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ScreenContext from '../../../context/screen';
+import SiteContext from '../../../context/global';
 import useGlobalData from '../../../hooks/data/global-data';
 import NavItem from './NavItem';
 import styles from './Nav.module.css';
@@ -8,10 +8,10 @@ import NavButton from './NavButton';
 const MobileNavigation = React.forwardRef<HTMLElement>((props, ref) => {
 	const globalData = useGlobalData();
 	const navItems = globalData.nav.filter(item => item.showInMobileNav);
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 
 	return (
-		<nav className={`${styles['mobile-nav']}${screenContext.navOpen ? ` ${styles['mobile-nav--hide']}` : ''}`} ref={ref}>
+		<nav className={`${styles['mobile-nav']}${siteContext.navOpen ? ` ${styles['mobile-nav--hide']}` : ''}`} ref={ref}>
 			{navItems.map((item, index) => {
 				return (
 					<NavItem
@@ -21,7 +21,7 @@ const MobileNavigation = React.forwardRef<HTMLElement>((props, ref) => {
 						isMobile={true}
 						className={`${styles[`mobile-nav__item--${item.pageID}`]} ${styles['mobile-nav__item']}`}
 						attributes={{
-							tabIndex: screenContext.navOpen ? -1 : undefined,
+							tabIndex: siteContext.navOpen ? -1 : undefined,
 						}}
 					>
 						<span className={styles['mobile-nav__label']}>{item.pageName}</span>

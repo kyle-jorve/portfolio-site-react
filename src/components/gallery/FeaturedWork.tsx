@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import ScreenContext from '../../context/screen';
+import SiteContext from '../../context/global';
 import CustomLink from '../shell/navigation/CustomLink';
 import useGlobalData from '../../hooks/data/global-data';
 import GalleryItem from './GalleryItem';
@@ -17,7 +17,7 @@ const ioOptions = {
 let io: IntersectionObserver;
 
 function FeaturedWork(props: FeaturedWorkProps) {
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const sectionRef = useRef<HTMLElement>(null!);
 	const globalData = useGlobalData();
 	const location = useLocation();
@@ -25,7 +25,7 @@ function FeaturedWork(props: FeaturedWorkProps) {
 	const [animationDone, setAnimationDone] = useState(false);
 	const page = globalData.nav.find(p => p.url === location.pathname);
 	const id = 'featured-work';
-	const totalDelay = (props.featuredItems.length - 1) * screenContext.transitionDelay + screenContext.transitionDuration;
+	const totalDelay = (props.featuredItems.length - 1) * siteContext.transitionDelay + siteContext.transitionDuration;
 
 	const ioHandler = useCallback(
 		(entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -73,10 +73,10 @@ function FeaturedWork(props: FeaturedWorkProps) {
 								fromSection={id}
 								className={!intersected ? styles['gallery__item--animated'] : ''}
 								style={{
-									transitionDelay: !animationDone ? `${index * screenContext.transitionDelay}ms` : '',
+									transitionDelay: !animationDone ? `${index * siteContext.transitionDelay}ms` : '',
 								}}
 								attributes={{
-									tabIndex: screenContext.navOpen ? -1 : undefined,
+									tabIndex: siteContext.navOpen ? -1 : undefined,
 								}}
 							/>
 						);
@@ -88,7 +88,7 @@ function FeaturedWork(props: FeaturedWorkProps) {
 						className="button button--primary"
 						to="/gallery"
 						attributes={{
-							tabIndex: screenContext.navOpen ? -1 : undefined,
+							tabIndex: siteContext.navOpen ? -1 : undefined,
 						}}
 					>
 						View Gallery

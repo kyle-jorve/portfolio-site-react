@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useContext } from 'react';
-import ScreenContext from '../context/screen';
+import SiteContext from '../context/global';
 import FeaturedWork from '../components/gallery/FeaturedWork';
 import HomeHero from '../components/hero/HomeHero';
 import HomeBio from '../components/cv/HomeBio';
@@ -14,14 +14,14 @@ function Home() {
 	const globalData = useGlobalData();
 	const galleryData = useGalleryData();
 	const featuredItems = galleryData.items.filter(item => item.featured).slice(0, homeData.gallery.itemsLimit);
-	const screenContext = useContext(ScreenContext);
+	const siteContext = useContext(SiteContext);
 	const cvData = useCVData();
 
 	useEffect(() => {
 		if (timeout) clearTimeout(timeout);
 
-		if (screenContext.fromSection) {
-			const section = document.querySelector(`#${screenContext.fromSection}`);
+		if (siteContext.fromSection) {
+			const section = document.querySelector(`#${siteContext.fromSection}`);
 
 			if (!section) return;
 
@@ -29,9 +29,9 @@ function Home() {
 		}
 
 		timeout = setTimeout(() => {
-			screenContext.setVisited(true);
+			siteContext.setVisited(true);
 		}, 3000); // total time for hero to animate in
-	}, [screenContext.fromSection]);
+	}, [siteContext.fromSection]);
 
 	return (
 		<Fragment>
