@@ -13,15 +13,13 @@ function MediaShowcase(props: MediaShowcaseProps) {
 	const context = useContext(SiteContext);
 	const item = props.item;
 	const slidesLength = item.detailKeys?.length;
-	const imagesLength = item.detailKeys?.filter(key => !key.source).length;
+	const imagesLength = item.detailKeys?.filter((key) => !key.source).length;
 	let imagesLoaded = 0;
 
 	useEffect(() => {
-		context.setImagesLoaded(false);
-
 		return () => {
 			context.setImagesLoaded(false);
-		}
+		};
 	});
 
 	function imageLoadHandler() {
@@ -30,7 +28,7 @@ function MediaShowcase(props: MediaShowcaseProps) {
 		if (imagesLoaded === imagesLength) {
 			context.setImagesLoaded(true);
 		}
-	};
+	}
 
 	function dotClickHandler(event: React.MouseEvent) {
 		const target = event.currentTarget as HTMLButtonElement;
@@ -92,7 +90,9 @@ function MediaShowcase(props: MediaShowcaseProps) {
 									key={index}
 									onClick={dotClickHandler}
 									className={`${styles['slider__dot']}${
-										index === context.activeSlideIndex ? ` ${styles['slider__dot--active']}` : ''
+										index === context.activeSlideIndex
+											? ` ${styles['slider__dot--active']}`
+											: ''
 									}`}
 									data-index={index}
 								></button>
