@@ -12,6 +12,15 @@
 	overflow: hidden;
 }
 
+.hero::before,
+.hero::after {
+	position: absolute;
+	z-index: 100;
+	display: block;
+	background: white;
+	content: '';
+}
+
 .hero--short {
 	justify-content: center;
 	min-height: 56.25vw;
@@ -25,7 +34,7 @@
 	position: absolute;
 	inset: 1rem auto auto 2rem;
 	z-index: 4;
-	transform: translate(calc(50vw - 50%), calc(50vh - 4rem - 50%)) scale(2);
+	transform: translate(calc(50vw - 50% - 2rem), calc(50vh - 4rem - 50%)) scale(2);
 	display: none;
 	width: var(--logo-width);
 	pointer-events: none;
@@ -202,10 +211,10 @@
 
 @keyframes moveLogo {
 	0% {
-		transform: translate(calc(50vw - 50%), calc(50vh - 4rem - 50%)) scale(2);
+		transform: translate(calc(50vw - 50% - 2rem), calc(50vh - 4rem - 50%)) scale(2);
 	}
 	50% {
-		transform: translate(calc(50vw - 50%), 0) scale(1);
+		transform: translate(calc(50vw - 50% - 2rem), 0) scale(1);
 	}
 	100% {
 		transform: none;
